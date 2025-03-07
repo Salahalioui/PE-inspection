@@ -17,6 +17,7 @@ import { TeacherDetails } from './components/inspector/TeacherDetails';
 import { FieldVisit } from './components/inspector/FieldVisit';
 import { FieldVisitList } from './components/inspector/FieldVisitList';
 import { Reports } from './components/inspector/Reports';
+import { TeacherSchedule } from './components/inspector/TeacherSchedule';
 
 function MainRouter() {
   const { user } = useAuth();
@@ -58,8 +59,9 @@ function MainRouter() {
         }
       >
         <Route path="teachers" element={<TeacherList />} />
-        <Route path="teachers/:teacherId" element={<TeacherDetails />} />
-        <Route path="visits" element={<FieldVisitList />} />
+            <Route path="teachers/:teacherId" element={<TeacherDetails />} />
+            <Route path="teachers/:teacherId/schedule" element={<TeacherSchedule />} />
+            <Route path="visits" element={<FieldVisitList />} />
         <Route path="visits/new" element={<FieldVisit />} />
         <Route path="reports" element={<Reports />} />
         <Route index element={<Navigate to="teachers" replace />} />

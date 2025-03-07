@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 
 interface TeacherProfile {
@@ -148,6 +148,12 @@ async function fetchTeacherData() {
           >
             Absences
           </button>
+          <Link
+            to={`/inspector/teachers/${teacherId}/schedule`}
+            className="px-4 py-2 rounded-md bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
+          >
+            View Schedule
+          </Link>
         </div>
       </div>
 
