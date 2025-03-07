@@ -10,7 +10,7 @@ interface Teacher {
 }
 
 interface FieldVisitReport {
-  teacher_id: string;
+  teacher_profile_id: string;
   visit_date: string;
   report_content: string;
   additional_comments: string;
@@ -25,7 +25,7 @@ export function FieldVisit() {
   const [selectedTeacher, setSelectedTeacher] = useState<string>('');
   
   const [report, setReport] = useState<FieldVisitReport>({
-    teacher_id: '',
+    teacher_profile_id: '',
     visit_date: new Date().toISOString().split('T')[0],
     report_content: '',
     additional_comments: ''
@@ -58,8 +58,11 @@ export function FieldVisit() {
     try {
       setSubmitting(true);
       const { error } = await supabase.from('field_visit_reports').insert({
-        ...report,
-        inspector_id: user.id
+        teacher_profile_id: selectedTeacher,
+        inspector_id: user.id,
+        visit_date: report.visit_date,
+        report_content: report.report_content,
+        additional_comments: report.additional_comments
       });
 
       if (error) throw error;
@@ -74,9 +77,9 @@ export function FieldVisit() {
     }
   };
 
-  const handleTeacherSelect = (teacherId: string) => {
-    setSelectedTeacher(teacherId);
-    setReport(prev => ({ ...prev, teacher_id: teacherId }));
+  const handleTeacherSelect = (teacherProfileId: string) => {
+    setSelectedTeacher(teacherProfileId);
+    setReport(prev => ({ ...prev, teacher_profile_id: teacherProfileId }));
   };
 
   if (loading) {
