@@ -3,6 +3,7 @@ import { supabase } from '../../lib/supabase';
 
 interface TeacherStats {
   id: string;
+  user_id: string;
   full_name: string;
   work_institution: string;
   lesson_completion: number;
@@ -24,37 +25,37 @@ export function Reports() {
 
   async function fetchTeacherStats() {
     try {
-      // Fetch teacher profiles
+      // Fetch teacher profiles with user_id
       const { data: teachers, error: teacherError } = await supabase
         .from('teacher_profiles')
-        .select('id, full_name, work_institution');
+        .select('id, user_id, full_name, work_institution');
 
       if (teacherError) throw teacherError;
 
       // For each teacher, fetch their stats
       const stats = await Promise.all(
         (teachers || []).map(async (teacher) => {
-          // Get lesson plans
+          // Get lesson plans using user_id
           const { data: lessonPlans, error: lessonError } = await supabase
             .from('lesson_plans')
             .select('*')
-            .eq('teacher_id', teacher.id);
+            .eq('teacher_id', teacher.user_id);
 
           if (lessonError) throw lessonError;
 
-          // Get absences
+          // Get absences using user_id
           const { data: absences, error: absenceError } = await supabase
             .from('absences')
             .select('*')
-            .eq('teacher_id', teacher.id);
+            .eq('teacher_id', teacher.user_id);
 
           if (absenceError) throw absenceError;
 
-          // Get field visits
+          // Get field visits using teacher_profile_id
           const { data: fieldVisits, error: visitError } = await supabase
             .from('field_visit_reports')
             .select('*')
-            .eq('teacher_id', teacher.id);
+            .eq('teacher_profile_id', teacher.id);
 
           if (visitError) throw visitError;
 
@@ -62,6 +63,7 @@ export function Reports() {
 
           return {
             id: teacher.id,
+            user_id: teacher.user_id,
             full_name: teacher.full_name,
             work_institution: teacher.work_institution,
             lesson_completion: lessonPlans?.length 

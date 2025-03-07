@@ -59,22 +59,24 @@ async function fetchTeacherData() {
       // Fetch teacher profile
       const { data: profileData, error: profileError } = await supabase
         .from('teacher_profiles')
-        .select(`
-          *,
-          user_id
-        `)
+        .select('*, user_id')
         .eq('id', teacherId)
         .single();
 
       if (profileError) throw profileError;
-      setTeacher(profileData as TeacherWithProfile);
+      
+      if (!profileData) {
+        setLoading(false);
+        return;
+      }
 
-      if (!profileData) return;
+      const teacherWithProfile = profileData as TeacherWithProfile;
+      setTeacher(teacherWithProfile);
 
       const { data: lessonData, error: lessonError } = await supabase
         .from('lesson_plans')
         .select('*')
-        .eq('teacher_id', profileData.user_id)
+            .eq('teacher_id', teacherWithProfile.user_id)
         .order('created_at', { ascending: false });
 
       if (lessonError) throw lessonError;
@@ -90,7 +92,7 @@ async function fetchTeacherData() {
             motif_label_fr
           )
         `)
-        .eq('teacher_id', profileData.user_id)
+            .eq('teacher_id', teacherWithProfile.user_id)
         .order('absence_date', { ascending: false });
 
       if (absenceError) throw absenceError;
