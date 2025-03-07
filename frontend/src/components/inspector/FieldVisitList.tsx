@@ -9,13 +9,17 @@ interface TeacherProfile {
   work_institution: string;
 }
 
-interface VisitReportData {
+interface DatabaseVisitReport {
   id: string;
   visit_date: string;
   report_content: string;
   additional_comments: string;
   created_at: string;
-  teacher_profile: TeacherProfile;
+  teacher_profile: {
+    id: string;
+    full_name: string;
+    work_institution: string;
+  };
 }
 
 interface FieldVisitReport {
@@ -41,6 +45,19 @@ export function FieldVisitList() {
     }
   }, [user]);
 
+type SupabaseResponse = {
+  id: string;
+  visit_date: string;
+  report_content: string | null;
+  additional_comments: string | null;
+  created_at: string;
+  teacher_profile: {
+    id: string;
+    full_name: string;
+    work_institution: string;
+  };
+}
+
   async function fetchReports() {
     try {
       const { data, error } = await supabase
@@ -63,16 +80,22 @@ export function FieldVisitList() {
       if (error) throw error;
       
       // Transform the data to match our FieldVisitReport interface
-      const typedData = (data || []).map(item => ({
+      // Cast the raw data to unknown first, then to our expected type
+      const rawData = data as unknown as SupabaseResponse[];
+      const typedData = (rawData || []).map(item => ({
         id: item.id,
         visit_date: item.visit_date,
-        report_content: item.report_content,
-        additional_comments: item.additional_comments,
+        report_content: item.report_content || '',
+        additional_comments: item.additional_comments || '',
         created_at: item.created_at,
-        teacher: {
-          id: item.teacher_profile?.[0]?.id,
-          full_name: item.teacher_profile?.[0]?.full_name,
-          work_institution: item.teacher_profile?.[0]?.work_institution
+        teacher: item.teacher_profile ? {
+          id: item.teacher_profile.id,
+          full_name: item.teacher_profile.full_name,
+          work_institution: item.teacher_profile.work_institution
+        } : {
+          id: '',
+          full_name: '',
+          work_institution: ''
         }
       })) as FieldVisitReport[];
 
@@ -85,9 +108,10 @@ export function FieldVisitList() {
   }
 
   const filteredReports = reports.filter(report => {
-    const matchesText = report.teacher.full_name.toLowerCase().includes(filterText.toLowerCase()) ||
-      report.teacher.work_institution.toLowerCase().includes(filterText.toLowerCase()) ||
-      report.report_content.toLowerCase().includes(filterText.toLowerCase());
+    const matchesText = 
+      (report.teacher?.full_name || '').toLowerCase().includes(filterText.toLowerCase()) ||
+      (report.teacher?.work_institution || '').toLowerCase().includes(filterText.toLowerCase()) ||
+      (report.report_content || '').toLowerCase().includes(filterText.toLowerCase());
 
     const matchesDate = !dateFilter || report.visit_date === dateFilter;
 
@@ -138,10 +162,10 @@ export function FieldVisitList() {
                     <div className="flex justify-between">
                       <div>
                         <h3 className="text-lg font-medium text-gray-900">
-                          {report.teacher.full_name}
+                          {report.teacher?.full_name}
                         </h3>
                         <p className="text-sm text-gray-500">
-                          {report.teacher.work_institution}
+                          {report.teacher?.work_institution}
                         </p>
                       </div>
                       <div className="text-right">
