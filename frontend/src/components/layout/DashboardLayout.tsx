@@ -54,10 +54,10 @@ export function DashboardLayout({ children, title }: DashboardLayoutProps) {
                 </>
               ) : userRole === 'inspector' ? (
                 <>
-                  <NavLink to="/inspector/profile">Profile</NavLink>
-                  <NavLink to="/inspector/teachers">Teacher List</NavLink>
-                  <NavLink to="/inspector/visits">Field Visits</NavLink>
-                  <NavLink to="/inspector/reports">Reports</NavLink>
+                  <NavLink to="/inspector/teachers">Teachers Overview</NavLink>
+                  <NavLink to="/inspector/visits">Field Visit Reports</NavLink>
+                  <NavLink to="/inspector/visits/new">Submit Field Visit</NavLink>
+                  <NavLink to="/inspector/reports">Analytics & Reports</NavLink>
                 </>
               ) : null}
             </nav>
