@@ -3,17 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 
+interface TeacherProfile {
+  id: string;
+  full_name: string;
+  work_institution: string;
+}
+
+interface VisitReportData {
+  id: string;
+  visit_date: string;
+  report_content: string;
+  additional_comments: string;
+  created_at: string;
+  teacher_profile: TeacherProfile;
+}
+
 interface FieldVisitReport {
   id: string;
   visit_date: string;
   report_content: string;
   additional_comments: string;
   created_at: string;
-  teacher: {
-    id: string;
-    full_name: string;
-    work_institution: string;
-  };
+  teacher: TeacherProfile;
 }
 
 export function FieldVisitList() {
@@ -40,7 +51,7 @@ export function FieldVisitList() {
           report_content,
           additional_comments,
           created_at,
-          teacher:teacher_profiles!inner (
+          teacher_profile:teacher_profiles!inner (
             id,
             full_name,
             work_institution
@@ -51,7 +62,7 @@ export function FieldVisitList() {
 
       if (error) throw error;
       
-      // Ensure the data matches our FieldVisitReport interface
+      // Transform the data to match our FieldVisitReport interface
       const typedData = (data || []).map(item => ({
         id: item.id,
         visit_date: item.visit_date,
@@ -59,9 +70,9 @@ export function FieldVisitList() {
         additional_comments: item.additional_comments,
         created_at: item.created_at,
         teacher: {
-          id: item.teacher[0].id,
-          full_name: item.teacher[0].full_name,
-          work_institution: item.teacher[0].work_institution
+          id: item.teacher_profile?.[0]?.id,
+          full_name: item.teacher_profile?.[0]?.full_name,
+          work_institution: item.teacher_profile?.[0]?.work_institution
         }
       })) as FieldVisitReport[];
 

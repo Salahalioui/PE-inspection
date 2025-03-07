@@ -50,23 +50,31 @@ export function TeacherDetails() {
     }
   }, [teacherId]);
 
-  async function fetchTeacherData() {
+interface TeacherWithProfile extends TeacherProfile {
+  user_id: string;
+}
+
+async function fetchTeacherData() {
     try {
       // Fetch teacher profile
       const { data: profileData, error: profileError } = await supabase
         .from('teacher_profiles')
-        .select('*')
+        .select(`
+          *,
+          user_id
+        `)
         .eq('id', teacherId)
         .single();
 
       if (profileError) throw profileError;
-      setTeacher(profileData);
+      setTeacher(profileData as TeacherWithProfile);
 
-      // Fetch lesson plans
+      if (!profileData) return;
+
       const { data: lessonData, error: lessonError } = await supabase
         .from('lesson_plans')
         .select('*')
-        .eq('teacher_id', teacherId)
+        .eq('teacher_id', profileData.user_id)
         .order('created_at', { ascending: false });
 
       if (lessonError) throw lessonError;
@@ -82,7 +90,7 @@ export function TeacherDetails() {
             motif_label_fr
           )
         `)
-        .eq('teacher_id', teacherId)
+        .eq('teacher_id', profileData.user_id)
         .order('absence_date', { ascending: false });
 
       if (absenceError) throw absenceError;
