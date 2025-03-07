@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './layout/LanguageSwitcher';
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -27,6 +30,11 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-indigo-900 via-blue-800 to-purple-900">
+      {/* Language Switcher */}
+      <div className="absolute top-4 right-4 z-10">
+        <LanguageSwitcher />
+      </div>
+
       {/* Abstract Background Shapes */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
@@ -47,13 +55,13 @@ export default function LandingPage() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            PE Inspector Platform
+            {t('landing.title')}
           </motion.h1>
           <motion.p
             className="text-xl md:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed"
             variants={itemVariants}
           >
-            Streamline physical education teaching management and evaluation in Algeria
+            {t('landing.subtitle')}
           </motion.p>
           
           <motion.div 
@@ -66,7 +74,7 @@ export default function LandingPage() {
               onClick={() => navigate('/login')}
               className="px-10 py-4 text-lg font-semibold rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg hover:shadow-blue-500/50 transition-all duration-300 backdrop-blur-sm"
             >
-              Login
+              {t('common.login')}
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -74,7 +82,7 @@ export default function LandingPage() {
               onClick={() => navigate('/register')}
               className="px-10 py-4 text-lg font-semibold rounded-xl border-2 border-white text-white hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
             >
-              Create Account
+              {t('landing.createAccount')}
             </motion.button>
           </motion.div>
         </motion.div>
@@ -88,23 +96,23 @@ export default function LandingPage() {
             whileHover={{ y: -5 }}
             className="p-8 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl hover:shadow-blue-500/20 transition-all duration-300"
           >
-            <h3 className="text-2xl font-semibold mb-6 text-white">For Teachers</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-white">{t('landing.forTeachers.title')}</h3>
             <ul className="text-blue-100 space-y-4">
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Manage personal and professional information</span>
+                <span>{t('landing.forTeachers.features.manageInfo')}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Track weekly schedules</span>
+                <span>{t('landing.forTeachers.features.trackSchedule')}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Create and monitor lesson plans</span>
+                <span>{t('landing.forTeachers.features.lessonPlans')}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Record and manage absences</span>
+                <span>{t('landing.forTeachers.features.manageAbsences')}</span>
               </li>
             </ul>
           </motion.div>
@@ -114,23 +122,23 @@ export default function LandingPage() {
             whileHover={{ y: -5 }}
             className="p-8 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl hover:shadow-purple-500/20 transition-all duration-300"
           >
-            <h3 className="text-2xl font-semibold mb-6 text-white">For Inspectors</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-white">{t('landing.forInspectors.title')}</h3>
             <ul className="text-blue-100 space-y-4">
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Review teacher profiles and progress</span>
+                <span>{t('landing.forInspectors.features.reviewProfiles')}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Submit field visit reports</span>
+                <span>{t('landing.forInspectors.features.submitReports')}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Monitor teaching effectiveness</span>
+                <span>{t('landing.forInspectors.features.monitorTeaching')}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Access comprehensive analytics</span>
+                <span>{t('landing.forInspectors.features.accessAnalytics')}</span>
               </li>
             </ul>
           </motion.div>
@@ -140,23 +148,23 @@ export default function LandingPage() {
             whileHover={{ y: -5 }}
             className="p-8 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl hover:shadow-indigo-500/20 transition-all duration-300"
           >
-            <h3 className="text-2xl font-semibold mb-6 text-white">Key Features</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-white">{t('landing.keyFeatures.title')}</h3>
             <ul className="text-blue-100 space-y-4">
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Bilingual support (Arabic & French)</span>
+                <span>{t('landing.keyFeatures.features.bilingual')}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Real-time progress tracking</span>
+                <span>{t('landing.keyFeatures.features.realTime')}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Secure data management</span>
+                <span>{t('landing.keyFeatures.features.secure')}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-blue-300">•</span>
-                <span>Responsive design for all devices</span>
+                <span>{t('landing.keyFeatures.features.responsive')}</span>
               </li>
             </ul>
           </motion.div>

@@ -4,7 +4,62 @@
     "login": "Connexion",
     "logout": "Déconnexion",
     "profile": "Profil",
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "processing": "En cours..."
+  },
+  "auth": {
+    "welcomeBack": "Bon retour!",
+    "createAccount": "Créez votre compte",
+    "signInPrompt": "Connectez-vous pour accéder à votre tableau de bord",
+    "joinPrompt": "Rejoignez-nous pour commencer à gérer vos tâches éducatives",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "selectRole": "Sélectionnez votre rôle",
+    "roles": {
+      "teacher": "Enseignant",
+      "inspector": "Inspecteur"
+    },
+    "messages": {
+      "accountCreated": "Compte créé avec succès! Veuillez vous connecter.",
+      "completeProfile": "Compte créé! Veuillez compléter votre profil après la connexion.",
+      "error": "Une erreur s'est produite"
+    },
+    "buttons": {
+      "signIn": "Se connecter",
+      "createAccount": "Créer un compte"
+    }
+  },
+  "landing": {
+    "title": "Plateforme des Inspecteurs d'EPS",
+    "subtitle": "Optimisez la gestion et l'évaluation de l'enseignement de l'éducation physique en Algérie",
+    "createAccount": "Créer un compte",
+    "forTeachers": {
+      "title": "Pour les Enseignants",
+      "features": {
+        "manageInfo": "Gérer les informations personnelles et professionnelles",
+        "trackSchedule": "Suivre les emplois du temps hebdomadaires",
+        "lessonPlans": "Créer et suivre les plans de cours",
+        "manageAbsences": "Enregistrer et gérer les absences"
+      }
+    },
+    "forInspectors": {
+      "title": "Pour les Inspecteurs",
+      "features": {
+        "reviewProfiles": "Examiner les profils et les progrès des enseignants",
+        "submitReports": "Soumettre des rapports de visite",
+        "monitorTeaching": "Surveiller l'efficacité de l'enseignement",
+        "accessAnalytics": "Accéder aux analyses complètes"
+      }
+    },
+    "keyFeatures": {
+      "title": "Fonctionnalités Clés",
+      "features": {
+        "bilingual": "Support bilingue (Arabe et Français)",
+        "realTime": "Suivi des progrès en temps réel",
+        "secure": "Gestion sécurisée des données",
+        "responsive": "Design adaptatif pour tous les appareils"
+      }
+    }
   },
   "inspector": {
     "dashboard": "Tableau de bord de l'inspecteur",

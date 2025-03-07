@@ -4,7 +4,62 @@
     "login": "Login",
     "logout": "Logout",
     "profile": "Profile",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "processing": "Processing..."
+  },
+  "auth": {
+    "welcomeBack": "Welcome back!",
+    "createAccount": "Create your account",
+    "signInPrompt": "Sign in to access your dashboard",
+    "joinPrompt": "Join us to start managing your educational tasks",
+    "email": "Email address",
+    "password": "Password",
+    "selectRole": "Select your role",
+    "roles": {
+      "teacher": "Teacher",
+      "inspector": "Inspector"
+    },
+    "messages": {
+      "accountCreated": "Account created successfully! Please log in.",
+      "completeProfile": "Account created! Please complete your profile after logging in.",
+      "error": "An error occurred"
+    },
+    "buttons": {
+      "signIn": "Sign in",
+      "createAccount": "Create account"
+    }
+  },
+  "landing": {
+    "title": "PE Inspector Platform",
+    "subtitle": "Streamline physical education teaching management and evaluation in Algeria",
+    "createAccount": "Create Account",
+    "forTeachers": {
+      "title": "For Teachers",
+      "features": {
+        "manageInfo": "Manage personal and professional information",
+        "trackSchedule": "Track weekly schedules",
+        "lessonPlans": "Create and monitor lesson plans",
+        "manageAbsences": "Record and manage absences"
+      }
+    },
+    "forInspectors": {
+      "title": "For Inspectors",
+      "features": {
+        "reviewProfiles": "Review teacher profiles and progress",
+        "submitReports": "Submit field visit reports",
+        "monitorTeaching": "Monitor teaching effectiveness",
+        "accessAnalytics": "Access comprehensive analytics"
+      }
+    },
+    "keyFeatures": {
+      "title": "Key Features",
+      "features": {
+        "bilingual": "Bilingual support (Arabic & French)",
+        "realTime": "Real-time progress tracking",
+        "secure": "Secure data management",
+        "responsive": "Responsive design for all devices"
+      }
+    }
   },
   "inspector": {
     "dashboard": "Inspector Dashboard",

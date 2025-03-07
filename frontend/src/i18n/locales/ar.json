@@ -4,7 +4,62 @@
     "login": "تسجيل الدخول",
     "logout": "تسجيل الخروج", 
     "profile": "الملف الشخصي",
-    "loading": "جاري التحميل..."
+    "loading": "جاري التحميل...",
+    "processing": "جاري المعالجة..."
+  },
+  "auth": {
+    "welcomeBack": "مرحباً بعودتك!",
+    "createAccount": "إنشاء حساب جديد",
+    "signInPrompt": "سجل الدخول للوصول إلى لوحة التحكم",
+    "joinPrompt": "انضم إلينا لبدء إدارة مهامك التعليمية",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "selectRole": "اختر دورك",
+    "roles": {
+      "teacher": "معلم",
+      "inspector": "مفتش"
+    },
+    "messages": {
+      "accountCreated": "تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول.",
+      "completeProfile": "تم إنشاء الحساب! يرجى إكمال ملفك الشخصي بعد تسجيل الدخول.",
+      "error": "حدث خطأ"
+    },
+    "buttons": {
+      "signIn": "تسجيل الدخول",
+      "createAccount": "إنشاء حساب"
+    }
+  },
+  "landing": {
+    "title": "منصة مفتشي التربية البدنية",
+    "subtitle": "تحسين إدارة وتقييم تعليم التربية البدنية في الجزائر",
+    "createAccount": "إنشاء حساب",
+    "forTeachers": {
+      "title": "للمعلمين",
+      "features": {
+        "manageInfo": "إدارة المعلومات الشخصية والمهنية",
+        "trackSchedule": "متابعة الجداول الأسبوعية",
+        "lessonPlans": "إنشاء ومراقبة خطط الدروس",
+        "manageAbsences": "تسجيل وإدارة الغيابات"
+      }
+    },
+    "forInspectors": {
+      "title": "للمفتشين",
+      "features": {
+        "reviewProfiles": "مراجعة ملفات وتقدم المعلمين",
+        "submitReports": "تقديم تقارير الزيارات الميدانية",
+        "monitorTeaching": "مراقبة فعالية التدريس",
+        "accessAnalytics": "الوصول إلى التحليلات الشاملة"
+      }
+    },
+    "keyFeatures": {
+      "title": "الميزات الرئيسية",
+      "features": {
+        "bilingual": "دعم اللغتين (العربية والفرنسية)",
+        "realTime": "تتبع التقدم في الوقت الفعلي",
+        "secure": "إدارة آمنة للبيانات",
+        "responsive": "تصميم متجاوب لجميع الأجهزة"
+      }
+    }
   },
   "inspector": {
     "dashboard": "لوحة تحكم المفتش",

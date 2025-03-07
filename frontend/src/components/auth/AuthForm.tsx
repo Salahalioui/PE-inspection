@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '../../lib/supabase';
 import { useNavigate } from 'react-router-dom';
+import LanguageSwitcher from '../layout/LanguageSwitcher';
 
 type AuthFormProps = {
   type: 'login' | 'register';
 };
 
 export function AuthForm({ type }: AuthFormProps) {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState<'teacher' | 'inspector'>('teacher');
@@ -28,7 +31,7 @@ export function AuthForm({ type }: AuthFormProps) {
           password,
           options: {
             data: {
-              role // This will be accessible as user.user_metadata.role
+              role
             },
           }
         });
@@ -37,7 +40,6 @@ export function AuthForm({ type }: AuthFormProps) {
 
         if (user) {
           if (role === 'teacher') {
-            // Create an empty teacher profile
             const { error: profileError } = await supabase
               .from('teacher_profiles')
               .insert([{ 
@@ -52,18 +54,17 @@ export function AuthForm({ type }: AuthFormProps) {
             if (profileError) {
               console.error('Profile creation error:', profileError);
               setSuccess(true);
-              setError('Account created! Please complete your profile after logging in.');
+              setError(t('auth.messages.completeProfile'));
             } else {
               setSuccess(true);
-              setError('Account created successfully! You can now log in.');
+              setError(t('auth.messages.accountCreated'));
             }
           } else {
             setSuccess(true);
-            setError('Account created successfully! You can now log in.');
+            setError(t('auth.messages.accountCreated'));
           }
         }
       } else {
-        // Login flow
         const { data, error: signInError } = await supabase.auth.signInWithPassword({
           email,
           password,
@@ -72,14 +73,13 @@ export function AuthForm({ type }: AuthFormProps) {
         if (signInError) throw signInError;
         
         if (data && data.user) {
-          // Get user's role from metadata
           const role = data.user.user_metadata?.role;
           navigate(role === 'teacher' ? '/teacher' : '/inspector');
         }
       }
     } catch (err) {
       setSuccess(false);
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : t('auth.messages.error'));
     } finally {
       setLoading(false);
     }
@@ -87,15 +87,18 @@ export function AuthForm({ type }: AuthFormProps) {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
+      {/* Language Switcher */}
+      <div className="absolute top-4 right-4">
+        <LanguageSwitcher />
+      </div>
+
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-2xl border border-gray-100">
         <div>
           <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">
-            {type === 'login' ? 'Welcome back!' : 'Create your account'}
+            {type === 'login' ? t('auth.welcomeBack') : t('auth.createAccount')}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            {type === 'login' 
-              ? 'Sign in to access your dashboard' 
-              : 'Join us to start managing your educational tasks'}
+            {type === 'login' ? t('auth.signInPrompt') : t('auth.joinPrompt')}
           </p>
         </div>
 
@@ -108,7 +111,7 @@ export function AuthForm({ type }: AuthFormProps) {
                 </svg>
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-green-800">Account created successfully! Please log in.</p>
+                <p className="text-sm font-medium text-green-800">{error}</p>
               </div>
             </div>
           </div>
@@ -117,7 +120,7 @@ export function AuthForm({ type }: AuthFormProps) {
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="email" className="sr-only">Email address</label>
+              <label htmlFor="email" className="sr-only">{t('auth.email')}</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -132,12 +135,12 @@ export function AuthForm({ type }: AuthFormProps) {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
+                  placeholder={t('auth.email')}
                 />
               </div>
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">Password</label>
+              <label htmlFor="password" className="sr-only">{t('auth.password')}</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -151,7 +154,7 @@ export function AuthForm({ type }: AuthFormProps) {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Password"
+                  placeholder={t('auth.password')}
                 />
               </div>
             </div>
@@ -160,7 +163,7 @@ export function AuthForm({ type }: AuthFormProps) {
           {type === 'register' && (
             <div className="rounded-md">
               <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
-                Select your role
+                {t('auth.selectRole')}
               </label>
               <div className="relative">
                 <select
@@ -169,8 +172,8 @@ export function AuthForm({ type }: AuthFormProps) {
                   onChange={(e) => setRole(e.target.value as 'teacher' | 'inspector')}
                   className="block w-full pl-3 pr-10 py-3 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md sm:text-sm"
                 >
-                  <option value="teacher">Teacher</option>
-                  <option value="inspector">Inspector</option>
+                  <option value="teacher">{t('auth.roles.teacher')}</option>
+                  <option value="inspector">{t('auth.roles.inspector')}</option>
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                   <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -181,22 +184,16 @@ export function AuthForm({ type }: AuthFormProps) {
             </div>
           )}
 
-          {error && (
-            <div className={`rounded-md ${success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'} p-4`}>
+          {error && !success && (
+            <div className="rounded-md bg-red-50 p-4">
               <div className="flex">
                 <div className="flex-shrink-0">
-                  {success ? (
-                    <svg className="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  ) : (
-                    <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                    </svg>
-                  )}
+                  <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm font-medium">{error}</p>
+                  <p className="text-sm font-medium text-red-800">{error}</p>
                 </div>
               </div>
             </div>
@@ -220,7 +217,7 @@ export function AuthForm({ type }: AuthFormProps) {
                   </svg>
                 )}
               </span>
-              {loading ? 'Processing...' : type === 'login' ? 'Sign in' : 'Create account'}
+              {loading ? t('common.processing') : type === 'login' ? t('auth.buttons.signIn') : t('auth.buttons.createAccount')}
             </button>
           </div>
         </form>
