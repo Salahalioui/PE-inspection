@@ -15,11 +15,16 @@ export function AbsenceTracker() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    console.log('User state:', user); // Debug log
     if (user) {
+      console.log('Loading data for user:', user.id); // Debug log
       Promise.all([
         loadAbsences(),
         loadMotifs()
-      ]).then(() => setLoading(false));
+      ]).then(() => {
+        console.log('Finished loading data'); // Debug log
+        setLoading(false);
+      });
     }
   }, [user]);
 
@@ -52,13 +57,27 @@ export function AbsenceTracker() {
 
   async function loadMotifs() {
     try {
+      console.log('Starting to load motifs...'); // Debug log
       const { data, error } = await supabase
         .from('absence_motifs')
-        .select('*')
+        .select('id, motif_label_fr, motif_label_ar, created_at, updated_at')
         .order('motif_label_fr', { ascending: true });
 
-      if (error) throw error;
-      setMotifs(data || []);
+      if (error) {
+        console.error('Supabase error:', error); // Debug log
+        throw error;
+      }
+
+      console.log('Motifs response:', { data, error }); // Debug log
+      
+      if (!data) {
+        console.warn('No motifs data received'); // Debug log
+        setMotifs([]);
+        return;
+      }
+
+      console.log('Setting motifs:', data); // Debug log
+      setMotifs(data);
     } catch (error) {
       console.error('Error loading motifs:', error);
       setMessage({ text: 'Failed to load absence motifs', type: 'error' });
