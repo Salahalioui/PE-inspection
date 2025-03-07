@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
@@ -7,19 +7,6 @@ interface TeacherProfile {
   id: string;
   full_name: string;
   work_institution: string;
-}
-
-interface DatabaseVisitReport {
-  id: string;
-  visit_date: string;
-  report_content: string;
-  additional_comments: string;
-  created_at: string;
-  teacher_profile: {
-    id: string;
-    full_name: string;
-    work_institution: string;
-  };
 }
 
 interface FieldVisitReport {
