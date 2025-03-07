@@ -1,0 +1,23 @@
+{
+  "common": {
+    "welcome": "Bienvenue",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "profile": "Profil",
+    "loading": "Chargement..."
+  },
+  "inspector": {
+    "dashboard": "Tableau de bord de l'inspecteur",
+    "fieldVisits": "Visites sur le terrain",
+    "reports": "Rapports",
+    "teachers": "Enseignants",
+    "schedule": "Emploi du temps"
+  },
+  "teacher": {
+    "dashboard": "Tableau de bord de l'enseignant",
+    "absenceTracker": "Suivi des absences",
+    "lessonPlans": "Plans de cours",
+    "progressReports": "Rapports de progression",
+    "weeklySchedule": "Planning hebdomadaire"
+  }
+}

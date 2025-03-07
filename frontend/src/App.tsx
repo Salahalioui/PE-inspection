@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { useAuth, AuthProvider } from './contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 import { AuthForm } from './components/auth/AuthForm';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 import LandingPage from './components/LandingPage';
@@ -21,6 +22,7 @@ import { TeacherSchedule } from './components/inspector/TeacherSchedule';
 
 function MainRouter() {
   const { user } = useAuth();
+  const { t } = useTranslation();
   
   return (
     <Routes>
@@ -33,7 +35,7 @@ function MainRouter() {
         path="/teacher"
         element={
           <ProtectedRoute role="teacher">
-            <DashboardLayout title="Teacher Dashboard">
+            <DashboardLayout title={t('teacher.dashboard')}>
               <Outlet />
             </DashboardLayout>
           </ProtectedRoute>
@@ -52,16 +54,16 @@ function MainRouter() {
         path="/inspector"
         element={
           <ProtectedRoute role="inspector">
-            <DashboardLayout title="Inspector Dashboard">
+            <DashboardLayout title={t('inspector.dashboard')}>
               <Outlet />
             </DashboardLayout>
           </ProtectedRoute>
         }
       >
         <Route path="teachers" element={<TeacherList />} />
-            <Route path="teachers/:teacherId" element={<TeacherDetails />} />
-            <Route path="teachers/:teacherId/schedule" element={<TeacherSchedule />} />
-            <Route path="visits" element={<FieldVisitList />} />
+        <Route path="teachers/:teacherId" element={<TeacherDetails />} />
+        <Route path="teachers/:teacherId/schedule" element={<TeacherSchedule />} />
+        <Route path="visits" element={<FieldVisitList />} />
         <Route path="visits/new" element={<FieldVisit />} />
         <Route path="reports" element={<Reports />} />
         <Route index element={<Navigate to="teachers" replace />} />
@@ -73,7 +75,7 @@ function MainRouter() {
   );
 }
 
-function App() {
+function App() {  
   return (
     <AuthProvider>
       <Router>
@@ -86,9 +88,10 @@ function App() {
 // Protected Route Component
 function ProtectedRoute({ children, role }: { children: React.ReactNode; role: string }) {
   const { user, loading } = useAuth();
+  const { t } = useTranslation();
   
   if (loading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return <div className="text-center py-8">{t('common.loading')}</div>;
   }
   
   if (!user || user.user_metadata?.role !== role) {

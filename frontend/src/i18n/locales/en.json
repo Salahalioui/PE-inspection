@@ -1,0 +1,23 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "loading": "Loading..."
+  },
+  "inspector": {
+    "dashboard": "Inspector Dashboard",
+    "fieldVisits": "Field Visits",
+    "reports": "Reports",
+    "teachers": "Teachers",
+    "schedule": "Schedule"
+  },
+  "teacher": {
+    "dashboard": "Teacher Dashboard",
+    "absenceTracker": "Absence Tracker",
+    "lessonPlans": "Lesson Plans",
+    "progressReports": "Progress Reports",
+    "weeklySchedule": "Weekly Schedule"
+  }
+}

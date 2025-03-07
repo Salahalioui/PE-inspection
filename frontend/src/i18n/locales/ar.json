@@ -1,0 +1,23 @@
+{
+  "common": {
+    "welcome": "مرحبا",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج", 
+    "profile": "الملف الشخصي",
+    "loading": "جاري التحميل..."
+  },
+  "inspector": {
+    "dashboard": "لوحة تحكم المفتش",
+    "fieldVisits": "الزيارات الميدانية",
+    "reports": "التقارير",
+    "teachers": "المعلمون",
+    "schedule": "الجدول الزمني"
+  },
+  "teacher": {
+    "dashboard": "لوحة تحكم المعلم",
+    "absenceTracker": "متتبع الغياب",
+    "lessonPlans": "خطط الدروس",
+    "progressReports": "تقارير التقدم",
+    "weeklySchedule": "الجدول الأسبوعي"
+  }
+}
