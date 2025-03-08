@@ -1,4 +1,53 @@
 {
+  "common": {
+    "welcome": "Bienvenue",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "profile": "Profil",
+    "loading": "Chargement...",
+    "processing": "En cours...",
+    "saving": "Enregistrement...",
+    "select": "Sélectionner",
+    "update": "Mettre à jour",
+    "create": "Créer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "required": "Champs obligatoires",
+    "optional": "Optionnel"
+  },
+  "days": {
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche"
+  },
+  "auth": {
+    "welcomeBack": "Bon retour!",
+    "createAccount": "Créez votre compte",
+    "signInPrompt": "Connectez-vous pour accéder à votre tableau de bord",
+    "joinPrompt": "Rejoignez-nous pour commencer à gérer vos tâches éducatives",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "selectRole": "Sélectionnez votre rôle",
+    "roles": {
+      "teacher": "Enseignant",
+      "inspector": "Inspecteur"
+    },
+    "messages": {
+      "accountCreated": "Compte créé avec succès! Veuillez vous connecter.",
+      "completeProfile": "Compte créé! Veuillez compléter votre profil après la connexion.",
+      "error": "Une erreur s'est produite"
+    },
+    "buttons": {
+      "signIn": "Se connecter",
+      "createAccount": "Créer un compte"
+    }
+  },
   "inspectorReports": {
     "title": "Statistiques des enseignants",
     "search": "Rechercher des enseignants...",
@@ -16,5 +65,241 @@
       "totalTeachers": "Total des enseignants",
       "totalAbsences": "Total des absences"
     }
+  },
+  "fieldVisit": {
+    "title": "Nouveau rapport de visite",
+    "form": {
+      "selectTeacher": {
+        "label": "Sélectionner l'enseignant",
+        "placeholder": "Sélectionner un enseignant"
+      },
+      "visitDate": "Date de visite",
+      "reportContent": {
+        "label": "Contenu du rapport",
+        "placeholder": "Entrez des observations et évaluations détaillées de votre visite..."
+      },
+      "additionalComments": {
+        "label": "Commentaires supplémentaires",
+        "placeholder": "Commentaires ou recommandations supplémentaires..."
+      }
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "submit": "Soumettre le rapport",
+      "submitting": "Soumission..."
+    },
+    "messages": {
+      "success": "Rapport soumis avec succès",
+      "error": "Échec de la soumission du rapport. Veuillez réessayer."
+    }
+  },
+  "fieldVisitList": {
+    "title": "Rapports de visite",
+    "actions": {
+      "newReport": "Nouveau rapport de visite"
+    },
+    "filters": {
+      "search": "Rechercher des rapports...",
+      "date": "Filtrer par date"
+    },
+    "report": {
+      "visitDate": "Date de visite",
+      "created": "Créé",
+      "content": "Contenu du rapport",
+      "comments": "Commentaires supplémentaires"
+    },
+    "noReports": "Aucun rapport de visite trouvé",
+    "loading": "Chargement..."
+  },
+  "inspectorTeacherList": {
+    "title": "Liste des enseignants",
+    "search": "Rechercher des enseignants...",
+    "table": {
+      "name": "Nom",
+      "institution": "Établissement",
+      "level": "Niveau",
+      "appointmentDate": "Date de nomination",
+      "actions": "Actions"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails"
+    },
+    "noTeachers": "Aucun enseignant trouvé",
+    "loading": "Chargement...",
+    "error": "Erreur lors de la récupération des enseignants"
+  },
+  "inspectorTeacherDetails": {
+    "loading": "Chargement...",
+    "notFound": "Enseignant non trouvé",
+    "tabs": {
+      "profile": "Profil",
+      "lessons": "Plans de leçon",
+      "absences": "Absences"
+    },
+    "actions": {
+      "viewSchedule": "Voir l'emploi du temps"
+    },
+    "profile": {
+      "fullName": "Nom complet",
+      "dateOfBirth": "Date de naissance",
+      "jobTitle": "Titre du poste",
+      "level": "Niveau",
+      "institution": "Établissement",
+      "position": "Position",
+      "grade": "Grade",
+      "appointmentDate": "Date de nomination"
+    },
+    "lessonPlans": {
+      "table": {
+        "number": "Leçon #",
+        "objectives": "Objectifs",
+        "status": "Statut",
+        "remarks": "Remarques",
+        "date": "Date"
+      },
+      "status": {
+        "completed": "Terminé",
+        "pending": "En attente"
+      },
+      "noPlans": "Aucun plan de leçon trouvé"
+    },
+    "absences": {
+      "table": {
+        "date": "Date",
+        "motifAr": "Motif (AR)",
+        "motifFr": "Motif (FR)",
+        "remarks": "Remarques"
+      },
+      "noAbsences": "Aucune absence trouvée"
+    }
+  },
+  "inspectorTeacherSchedule": {
+    "loading": "Chargement de l'emploi du temps...",
+    "error": "Échec du chargement de l'emploi du temps",
+    "notFound": "Enseignant non trouvé",
+    "title": "Emploi du temps de {{name}}",
+    "institution": "Établissement: {{institution}}",
+    "noSchedule": "Aucun emploi du temps trouvé."
+  },
+  "progressReports": {
+    "title": "Rapports de progression",
+    "cards": {
+      "lessonCompletion": {
+        "title": "Progression des leçons",
+        "percentage": "{{percentage}}%",
+        "status": "{{completed}} sur {{total}} leçons terminées"
+      },
+      "absences": {
+        "title": "Absences",
+        "total": "Total des absences enregistrées"
+      }
+    },
+    "monthlyProgress": {
+      "title": "Progression mensuelle",
+      "noData": "Aucune donnée mensuelle disponible.",
+      "lessons": "{{completed}}/{{total}} leçons",
+      "absencesCount": "{{count}} absence",
+      "absencesCountPlural": "{{count}} absences"
+    },
+    "summary": {
+      "title": "Résumé",
+      "completion": "Vous avez terminé {{completed}} sur {{total}} leçons (taux de {{percentage}}%).",
+      "absencesCount": "{{count}} absence.",
+      "absencesCountPlural": "{{count}} absences."
+    },
+    "messages": {
+      "loadLessonError": "Échec du chargement des données des plans de leçon",
+      "loadAbsenceError": "Échec du chargement des données des absences"
+    }
+  },
+  "teacherProfile": {
+    "title": "Profil de l'enseignant",
+    "personal": {
+      "title": "Informations personnelles",
+      "fullName": "Nom complet",
+      "dateOfBirth": "Date de naissance",
+      "firstName": "Prénom",
+      "lastName": "Nom"
+    },
+    "professional": {
+      "title": "Informations professionnelles",
+      "jobTitle": "Titre du poste",
+      "level": "Niveau",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "workInstitution": "Établissement",
+      "position": "Position",
+      "grade": "Grade",
+      "appointmentDate": "Date de nomination",
+      "confirmationDate": "Date de confirmation",
+      "maritalStatus": {
+        "label": "État civil",
+        "select": "Sélectionner l'état",
+        "single": "Célibataire",
+        "married": "Marié(e)",
+        "divorced": "Divorcé(e)",
+        "widowed": "Veuf/Veuve"
+      },
+      "certificateObtained": "Certificat obtenu"
+    },
+    "messages": {
+      "loadError": "Échec du chargement des données du profil",
+      "updateSuccess": "Profil mis à jour avec succès",
+      "createSuccess": "Profil créé avec succès",
+      "updateError": "Échec de la mise à jour du profil",
+      "createError": "Échec de la création du profil",
+      "fillRequired": "Veuillez remplir tous les champs obligatoires"
+    },
+    "buttons": {
+      "updateProfile": "Mettre à jour le profil",
+      "createProfile": "Créer le profil",
+      "submit": "Soumettre"
+    }
+  },
+  "landing": {
+    "title": "Plateforme des Inspecteurs d'EPS",
+    "subtitle": "Optimisez la gestion et l'évaluation de l'enseignement de l'éducation physique en Algérie",
+    "createAccount": "Créer un compte",
+    "forTeachers": {
+      "title": "Pour les enseignants",
+      "features": {
+        "manageInfo": "Gérer les informations personnelles et professionnelles",
+        "trackSchedule": "Suivre les emplois du temps hebdomadaires",
+        "lessonPlans": "Créer et suivre les plans de leçon",
+        "manageAbsences": "Enregistrer et gérer les absences"
+      }
+    },
+    "forInspectors": {
+      "title": "Pour les inspecteurs",
+      "features": {
+        "reviewProfiles": "Examiner les profils et la progression des enseignants",
+        "submitReports": "Soumettre des rapports de visite",
+        "monitorTeaching": "Suivre l'efficacité de l'enseignement",
+        "accessAnalytics": "Accéder à des analyses complètes"
+      }
+    },
+    "keyFeatures": {
+      "title": "Fonctionnalités clés",
+      "features": {
+        "bilingual": "Support bilingue (Arabe & Français)",
+        "realTime": "Suivi en temps réel de la progression",
+        "secure": "Gestion sécurisée des données",
+        "responsive": "Design adaptatif pour tous les appareils"
+      }
+    }
+  },
+  "inspector": {
+    "dashboard": "Tableau de bord de l'inspecteur",
+    "fieldVisits": "Visites sur le terrain",
+    "reports": "Rapports",
+    "teachers": "Enseignants",
+    "schedule": "Emploi du temps"
+  },
+  "teacher": {
+    "dashboard": "Tableau de bord de l'enseignant",
+    "absenceTracker": "Suivi des absences",
+    "lessonPlans": "Plans de leçon",
+    "progressReports": "Rapports de progression",
+    "weeklySchedule": "Emploi du temps hebdomadaire"
   }
 }
