@@ -48,6 +48,51 @@
       "createAccount": "Créer un compte"
     }
   },
+  "fieldVisit": {
+    "title": "Nouveau rapport de visite",
+    "form": {
+      "selectTeacher": {
+        "label": "Sélectionner un enseignant",
+        "placeholder": "Sélectionnez un enseignant"
+      },
+      "visitDate": "Date de visite",
+      "reportContent": {
+        "label": "Contenu du rapport",
+        "placeholder": "Entrez vos observations et évaluations détaillées de la visite..."
+      },
+      "additionalComments": {
+        "label": "Commentaires additionnels",
+        "placeholder": "Ajoutez des commentaires ou recommandations supplémentaires..."
+      }
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "submit": "Soumettre le rapport",
+      "submitting": "Soumission en cours..."
+    },
+    "messages": {
+      "success": "Rapport soumis avec succès",
+      "error": "Échec de la soumission du rapport. Veuillez réessayer."
+    }
+  },
+  "fieldVisitList": {
+    "title": "Rapports de visites",
+    "actions": {
+      "newReport": "Nouveau rapport"
+    },
+    "filters": {
+      "search": "Rechercher des rapports...",
+      "date": "Filtrer par date"
+    },
+    "report": {
+      "visitDate": "Date de visite",
+      "created": "Créé le",
+      "content": "Contenu du rapport",
+      "comments": "Commentaires additionnels"
+    },
+    "noReports": "Aucun rapport de visite trouvé",
+    "loading": "Chargement..."
+  },
   "inspectorTeacherList": {
     "title": "Liste des enseignants",
     "search": "Rechercher des enseignants...",

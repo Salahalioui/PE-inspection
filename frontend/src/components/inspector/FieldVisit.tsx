@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -17,6 +18,7 @@ interface FieldVisitReport {
 }
 
 export function FieldVisit() {
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [teachers, setTeachers] = useState<Teacher[]>([]);
@@ -30,6 +32,9 @@ export function FieldVisit() {
     report_content: '',
     additional_comments: ''
   });
+
+  // RTL support
+  const isRTL = i18n.language === 'ar';
 
   useEffect(() => {
     fetchTeachers();
@@ -67,11 +72,10 @@ export function FieldVisit() {
 
       if (error) throw error;
 
-      // Redirect to field visits list after successful submission
       navigate('/inspector/visits');
     } catch (error) {
       console.error('Error submitting field visit report:', error);
-      alert('Failed to submit report. Please try again.');
+      alert(t('fieldVisit.messages.error'));
     } finally {
       setSubmitting(false);
     }
@@ -83,18 +87,18 @@ export function FieldVisit() {
   };
 
   if (loading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return <div className="text-center py-8">{t('common.loading')}</div>;
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <h2 className="text-xl font-semibold text-gray-800">New Field Visit Report</h2>
+    <div className={`max-w-4xl mx-auto space-y-6 ${isRTL ? 'rtl' : 'ltr'}`}>
+      <h2 className="text-xl font-semibold text-gray-800">{t('fieldVisit.title')}</h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-4">
           <div>
             <label htmlFor="teacher" className="block text-sm font-medium text-gray-700">
-              Select Teacher
+              {t('fieldVisit.form.selectTeacher.label')}
             </label>
             <select
               id="teacher"
@@ -103,7 +107,7 @@ export function FieldVisit() {
               className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               required
             >
-              <option value="">Select a teacher</option>
+              <option value="">{t('fieldVisit.form.selectTeacher.placeholder')}</option>
               {teachers.map((teacher) => (
                 <option key={teacher.id} value={teacher.id}>
                   {teacher.full_name} - {teacher.work_institution}
@@ -114,7 +118,7 @@ export function FieldVisit() {
 
           <div>
             <label htmlFor="visit-date" className="block text-sm font-medium text-gray-700">
-              Visit Date
+              {t('fieldVisit.form.visitDate')}
             </label>
             <input
               type="date"
@@ -128,7 +132,7 @@ export function FieldVisit() {
 
           <div>
             <label htmlFor="report-content" className="block text-sm font-medium text-gray-700">
-              Report Content
+              {t('fieldVisit.form.reportContent.label')}
             </label>
             <textarea
               id="report-content"
@@ -136,14 +140,14 @@ export function FieldVisit() {
               value={report.report_content}
               onChange={(e) => setReport(prev => ({ ...prev, report_content: e.target.value }))}
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              placeholder="Enter detailed observations and evaluations from your visit..."
+              placeholder={t('fieldVisit.form.reportContent.placeholder')}
               required
             />
           </div>
 
           <div>
             <label htmlFor="additional-comments" className="block text-sm font-medium text-gray-700">
-              Additional Comments
+              {t('fieldVisit.form.additionalComments.label')}
             </label>
             <textarea
               id="additional-comments"
@@ -151,18 +155,18 @@ export function FieldVisit() {
               value={report.additional_comments}
               onChange={(e) => setReport(prev => ({ ...prev, additional_comments: e.target.value }))}
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              placeholder="Any additional comments or recommendations..."
+              placeholder={t('fieldVisit.form.additionalComments.placeholder')}
             />
           </div>
         </div>
 
-        <div className="flex justify-end space-x-3">
+        <div className={`flex ${isRTL ? 'justify-start space-x-reverse' : 'justify-end'} space-x-3`}>
           <button
             type="button"
             onClick={() => navigate('/inspector/visits')}
             className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
-            Cancel
+            {t('fieldVisit.buttons.cancel')}
           </button>
           <button
             type="submit"
@@ -171,7 +175,7 @@ export function FieldVisit() {
               submitting ? 'opacity-75 cursor-not-allowed' : ''
             }`}
           >
-            {submitting ? 'Submitting...' : 'Submit Report'}
+            {submitting ? t('fieldVisit.buttons.submitting') : t('fieldVisit.buttons.submit')}
           </button>
         </div>
       </form>

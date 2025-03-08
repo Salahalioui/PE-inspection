@@ -48,6 +48,51 @@
       "createAccount": "Create account"
     }
   },
+  "fieldVisit": {
+    "title": "New Field Visit Report",
+    "form": {
+      "selectTeacher": {
+        "label": "Select Teacher",
+        "placeholder": "Select a teacher"
+      },
+      "visitDate": "Visit Date",
+      "reportContent": {
+        "label": "Report Content",
+        "placeholder": "Enter detailed observations and evaluations from your visit..."
+      },
+      "additionalComments": {
+        "label": "Additional Comments",
+        "placeholder": "Any additional comments or recommendations..."
+      }
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Submit Report",
+      "submitting": "Submitting..."
+    },
+    "messages": {
+      "success": "Report submitted successfully",
+      "error": "Failed to submit report. Please try again."
+    }
+  },
+  "fieldVisitList": {
+    "title": "Field Visit Reports",
+    "actions": {
+      "newReport": "New Visit Report"
+    },
+    "filters": {
+      "search": "Search reports...",
+      "date": "Filter by date"
+    },
+    "report": {
+      "visitDate": "Visit Date",
+      "created": "Created",
+      "content": "Report Content",
+      "comments": "Additional Comments"
+    },
+    "noReports": "No field visit reports found",
+    "loading": "Loading..."
+  },
   "inspectorTeacherList": {
     "title": "Teacher List",
     "search": "Search teachers...",
@@ -141,8 +186,8 @@
     "summary": {
       "title": "Summary",
       "completion": "You have completed {{completed}} out of {{total}} lessons ({{percentage}}% completion rate).",
-      "absencesCount": "You have recorded {{count}} absence.",
-      "absencesCountPlural": "You have recorded {{count}} absences."
+      "absencesCount": "{{count}} absence.",
+      "absencesCountPlural": "{{count}} absences."
     },
     "messages": {
       "loadLessonError": "Failed to load lesson plan data",

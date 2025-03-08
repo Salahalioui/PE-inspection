@@ -48,6 +48,51 @@
       "createAccount": "إنشاء حساب"
     }
   },
+  "fieldVisit": {
+    "title": "تقرير زيارة جديد",
+    "form": {
+      "selectTeacher": {
+        "label": "اختر المعلم",
+        "placeholder": "اختر معلماً"
+      },
+      "visitDate": "تاريخ الزيارة",
+      "reportContent": {
+        "label": "محتوى التقرير",
+        "placeholder": "أدخل ملاحظاتك وتقييماتك المفصلة من الزيارة..."
+      },
+      "additionalComments": {
+        "label": "تعليقات إضافية",
+        "placeholder": "أضف أي تعليقات أو توصيات إضافية..."
+      }
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "submit": "إرسال التقرير",
+      "submitting": "جاري الإرسال..."
+    },
+    "messages": {
+      "success": "تم إرسال التقرير بنجاح",
+      "error": "فشل في إرسال التقرير. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "fieldVisitList": {
+    "title": "تقارير الزيارات",
+    "actions": {
+      "newReport": "تقرير زيارة جديد"
+    },
+    "filters": {
+      "search": "البحث في التقارير...",
+      "date": "تصفية حسب التاريخ"
+    },
+    "report": {
+      "visitDate": "تاريخ الزيارة",
+      "created": "تم الإنشاء في",
+      "content": "محتوى التقرير",
+      "comments": "تعليقات إضافية"
+    },
+    "noReports": "لم يتم العثور على تقارير زيارة",
+    "loading": "جاري التحميل..."
+  },
   "inspectorTeacherList": {
     "title": "قائمة المعلمين",
     "search": "البحث عن المعلمين...",
