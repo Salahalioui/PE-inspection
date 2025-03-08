@@ -17,6 +17,15 @@
     "required": "Required fields",
     "optional": "Optional"
   },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
   "auth": {
     "welcomeBack": "Welcome back!",
     "createAccount": "Create your account",
@@ -39,18 +48,28 @@
       "createAccount": "Create account"
     }
   },
-  "dashboard": {
-    "teacher": "Teacher Dashboard",
-    "inspector": "Inspector Dashboard",
-    "user": {
-      "role": "Role"
+  "weeklySchedule": {
+    "title": "Weekly Schedule",
+    "addEntry": "Add Schedule Entry",
+    "editEntry": "Edit Schedule Entry",
+    "noEntries": "No schedule entries for this day",
+    "fields": {
+      "dayOfWeek": "Day of Week",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "subjectClass": "Subject/Class"
     },
-    "navigation": {
-      "profile": "Profile",
-      "schedule": "Schedule",
-      "lessons": "Lessons",
-      "absences": "Absences",
-      "progress": "Progress"
+    "messages": {
+      "deleteConfirm": "Are you sure you want to delete this schedule entry?",
+      "loadError": "Failed to load schedule data",
+      "deleteSuccess": "Schedule entry deleted successfully",
+      "deleteError": "Failed to delete schedule entry",
+      "saveSuccess": "Schedule entry saved successfully",
+      "updateSuccess": "Schedule entry updated successfully",
+      "saveError": "Failed to save schedule entry",
+      "fillRequired": "Please fill in all required fields",
+      "entryAdded": "New schedule entry added",
+      "entryUpdated": "Schedule entry updated"
     }
   },
   "teacherProfile": {
@@ -97,6 +116,35 @@
       "submit": "Submit"
     }
   },
+  "lessonPlans": {
+    "title": "Lesson Plans",
+    "addPlan": "Add Lesson Plan",
+    "editPlan": "Edit Lesson Plan",
+    "noPlans": "No lesson plans yet. Click \"Add Lesson Plan\" to create your first one.",
+    "fields": {
+      "lessonNumber": "Lesson Number",
+      "objectives": "Objectives",
+      "status": "Status",
+      "remarks": "Remarks",
+      "actions": "Actions",
+      "completionStatus": "Mark as completed"
+    },
+    "status": {
+      "completed": "Completed",
+      "notCompleted": "Not Completed"
+    },
+    "messages": {
+      "deleteConfirm": "Are you sure you want to delete this lesson plan?",
+      "loadError": "Failed to load lesson plans",
+      "deleteSuccess": "Lesson plan deleted successfully",
+      "deleteError": "Failed to delete lesson plan",
+      "saveSuccess": "Lesson plan saved successfully",
+      "updateSuccess": "Lesson plan updated successfully",
+      "saveError": "Failed to save lesson plan",
+      "fillRequired": "Please fill in all required fields",
+      "statusUpdate": "Lesson {{number}} marked as {{status}}"
+    }
+  },
   "landing": {
     "title": "PE Inspector Platform",
     "subtitle": "Streamline physical education teaching management and evaluation in Algeria",
@@ -127,57 +175,6 @@
         "secure": "Secure data management",
         "responsive": "Responsive design for all devices"
       }
-    }
-  },
-  "weeklySchedule": {
-    "title": "Weekly Schedule",
-    "addEntry": "Add Schedule Entry",
-    "editEntry": "Edit Schedule Entry",
-    "noEntries": "No schedule entries for this day",
-    "fields": {
-      "dayOfWeek": "Day of Week",
-      "startTime": "Start Time",
-      "endTime": "End Time",
-      "subjectClass": "Subject/Class"
-    },
-    "messages": {
-      "deleteConfirm": "Are you sure you want to delete this schedule entry?",
-      "loadError": "Failed to load schedule data",
-      "deleteSuccess": "Schedule entry deleted successfully",
-      "deleteError": "Failed to delete schedule entry",
-      "saveSuccess": "Schedule entry saved successfully",
-      "updateSuccess": "Schedule entry updated successfully",
-      "saveError": "Failed to save schedule entry",
-      "fillRequired": "Please fill in all required fields"
-    }
-  },
-  "lessonPlans": {
-    "title": "Lesson Plans",
-    "addPlan": "Add Lesson Plan",
-    "editPlan": "Edit Lesson Plan",
-    "noPlans": "No lesson plans yet. Click \"Add Lesson Plan\" to create your first one.",
-    "fields": {
-      "lessonNumber": "Lesson Number",
-      "objectives": "Objectives",
-      "status": "Status",
-      "remarks": "Remarks",
-      "actions": "Actions",
-      "completionStatus": "Mark as completed"
-    },
-    "status": {
-      "completed": "Completed",
-      "notCompleted": "Not Completed"
-    },
-    "messages": {
-      "deleteConfirm": "Are you sure you want to delete this lesson plan?",
-      "loadError": "Failed to load lesson plans",
-      "deleteSuccess": "Lesson plan deleted successfully",
-      "deleteError": "Failed to delete lesson plan",
-      "saveSuccess": "Lesson plan saved successfully",
-      "updateSuccess": "Lesson plan updated successfully",
-      "saveError": "Failed to save lesson plan",
-      "fillRequired": "Please fill in all required fields",
-      "statusUpdate": "Lesson {{number}} marked as {{status}}"
     }
   },
   "inspector": {

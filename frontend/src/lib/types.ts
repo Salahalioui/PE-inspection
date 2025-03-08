@@ -1,3 +1,16 @@
+export type DayOfWeek = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday';
+
+export interface WeeklySchedule {
+  id: string;
+  teacher_id: string;
+  day_of_week: DayOfWeek;
+  start_time: string;
+  end_time: string;
+  subject_class: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface TeacherProfileType {
   id?: string;
   user_id: string;

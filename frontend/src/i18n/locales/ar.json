@@ -17,6 +17,15 @@
     "required": "الحقول المطلوبة",
     "optional": "اختياري"
   },
+  "days": {
+    "monday": "الإثنين",
+    "tuesday": "الثلاثاء",
+    "wednesday": "الأربعاء",
+    "thursday": "الخميس",
+    "friday": "الجمعة",
+    "saturday": "السبت",
+    "sunday": "الأحد"
+  },
   "auth": {
     "welcomeBack": "مرحباً بعودتك!",
     "createAccount": "إنشاء حساب جديد",
@@ -39,18 +48,28 @@
       "createAccount": "إنشاء حساب"
     }
   },
-  "dashboard": {
-    "teacher": "لوحة تحكم المعلم",
-    "inspector": "لوحة تحكم المفتش",
-    "user": {
-      "role": "الدور"
+  "weeklySchedule": {
+    "title": "الجدول الأسبوعي",
+    "addEntry": "إضافة حصة جديدة",
+    "editEntry": "تعديل الحصة",
+    "noEntries": "لا توجد حصص لهذا اليوم",
+    "fields": {
+      "dayOfWeek": "يوم الأسبوع",
+      "startTime": "وقت البداية",
+      "endTime": "وقت النهاية",
+      "subjectClass": "المادة/الفصل"
     },
-    "navigation": {
-      "profile": "الملف الشخصي",
-      "schedule": "الجدول",
-      "lessons": "الدروس",
-      "absences": "الغيابات",
-      "progress": "التقدم"
+    "messages": {
+      "deleteConfirm": "هل أنت متأكد من حذف هذه الحصة؟",
+      "loadError": "فشل في تحميل بيانات الجدول",
+      "deleteSuccess": "تم حذف الحصة بنجاح",
+      "deleteError": "فشل في حذف الحصة",
+      "saveSuccess": "تم حفظ الحصة بنجاح",
+      "updateSuccess": "تم تحديث الحصة بنجاح",
+      "saveError": "فشل في حفظ الحصة",
+      "fillRequired": "يرجى ملء جميع الحقول المطلوبة",
+      "entryAdded": "تمت إضافة حصة جديدة",
+      "entryUpdated": "تم تحديث الحصة"
     }
   },
   "teacherProfile": {
@@ -97,6 +116,35 @@
       "submit": "إرسال"
     }
   },
+  "lessonPlans": {
+    "title": "خطط الدروس",
+    "addPlan": "إضافة خطة",
+    "editPlan": "تعديل الخطة",
+    "noPlans": "لا توجد خطط دروس. انقر على \"إضافة خطة\" لإنشاء أول خطة",
+    "fields": {
+      "lessonNumber": "رقم الدرس",
+      "objectives": "الأهداف",
+      "status": "الحالة",
+      "remarks": "ملاحظات",
+      "actions": "إجراءات",
+      "completionStatus": "تحديد كمكتمل"
+    },
+    "status": {
+      "completed": "مكتمل",
+      "notCompleted": "غير مكتمل"
+    },
+    "messages": {
+      "deleteConfirm": "هل أنت متأكد من حذف هذه الخطة؟",
+      "loadError": "فشل في تحميل الخطط",
+      "deleteSuccess": "تم حذف الخطة بنجاح",
+      "deleteError": "فشل في حذف الخطة",
+      "saveSuccess": "تم حفظ الخطة بنجاح",
+      "updateSuccess": "تم تحديث الخطة بنجاح",
+      "saveError": "فشل في حفظ الخطة",
+      "fillRequired": "يرجى ملء جميع الحقول المطلوبة",
+      "statusUpdate": "تم تحديد الدرس {{number}} كـ {{status}}"
+    }
+  },
   "landing": {
     "title": "منصة مفتشي التربية البدنية",
     "subtitle": "تحسين إدارة وتقييم تعليم التربية البدنية في الجزائر",
@@ -127,57 +175,6 @@
         "secure": "إدارة آمنة للبيانات",
         "responsive": "تصميم متجاوب لجميع الأجهزة"
       }
-    }
-  },
-  "weeklySchedule": {
-    "title": "الجدول الأسبوعي",
-    "addEntry": "إضافة جدول جديد",
-    "editEntry": "تعديل الجدول",
-    "noEntries": "لا توجد جداول لهذا اليوم",
-    "fields": {
-      "dayOfWeek": "يوم الأسبوع",
-      "startTime": "وقت البداية",
-      "endTime": "وقت النهاية",
-      "subjectClass": "المادة/الفصل"
-    },
-    "messages": {
-      "deleteConfirm": "هل أنت متأكد من حذف هذا الجدول؟",
-      "loadError": "فشل في تحميل بيانات الجدول",
-      "deleteSuccess": "تم حذف الجدول بنجاح",
-      "deleteError": "فشل في حذف الجدول",
-      "saveSuccess": "تم حفظ الجدول بنجاح",
-      "updateSuccess": "تم تحديث الجدول بنجاح",
-      "saveError": "فشل في حفظ الجدول",
-      "fillRequired": "يرجى ملء جميع الحقول المطلوبة"
-    }
-  },
-  "lessonPlans": {
-    "title": "خطط الدروس",
-    "addPlan": "إضافة خطة",
-    "editPlan": "تعديل الخطة",
-    "noPlans": "لا توجد خطط دروس. انقر على \"إضافة خطة\" لإنشاء أول خطة",
-    "fields": {
-      "lessonNumber": "رقم الدرس",
-      "objectives": "الأهداف",
-      "status": "الحالة",
-      "remarks": "ملاحظات",
-      "actions": "إجراءات",
-      "completionStatus": "تحديد كمكتمل"
-    },
-    "status": {
-      "completed": "مكتمل",
-      "notCompleted": "غير مكتمل"
-    },
-    "messages": {
-      "deleteConfirm": "هل أنت متأكد من حذف هذه الخطة؟",
-      "loadError": "فشل في تحميل الخطط",
-      "deleteSuccess": "تم حذف الخطة بنجاح",
-      "deleteError": "فشل في حذف الخطة",
-      "saveSuccess": "تم حفظ الخطة بنجاح",
-      "updateSuccess": "تم تحديث الخطة بنجاح",
-      "saveError": "فشل في حفظ الخطة",
-      "fillRequired": "يرجى ملء جميع الحقول المطلوبة",
-      "statusUpdate": "تم تحديد الدرس {{number}} كـ {{status}}"
     }
   },
   "inspector": {

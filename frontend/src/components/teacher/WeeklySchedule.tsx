@@ -1,11 +1,23 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
-import type { WeeklySchedule as WeeklyScheduleType } from '../../lib/supabase';
+import type { WeeklySchedule as WeeklyScheduleType, DayOfWeek } from '../../lib/types';
 
 type ScheduleEntry = WeeklyScheduleType & { isNew?: boolean };
 
+const DAYS_MAPPING: Record<DayOfWeek, [string, string, string]> = {
+  'Monday': ['Monday', 'Lundi', 'الإثنين'],
+  'Tuesday': ['Tuesday', 'Mardi', 'الثلاثاء'],
+  'Wednesday': ['Wednesday', 'Mercredi', 'الأربعاء'],
+  'Thursday': ['Thursday', 'Jeudi', 'الخميس'],
+  'Friday': ['Friday', 'Vendredi', 'الجمعة'],
+  'Saturday': ['Saturday', 'Samedi', 'السبت'],
+  'Sunday': ['Sunday', 'Dimanche', 'الأحد']
+};
+
 export function WeeklySchedule() {
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [scheduleEntries, setScheduleEntries] = useState<ScheduleEntry[]>([]);
@@ -13,13 +25,44 @@ export function WeeklySchedule() {
   const [editingEntry, setEditingEntry] = useState<ScheduleEntry | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const daysOfWeek = [
+    t('days.monday'),
+    t('days.tuesday'),
+    t('days.wednesday'),
+    t('days.thursday'),
+    t('days.friday'),
+    t('days.saturday'),
+    t('days.sunday')
+  ];
 
   useEffect(() => {
     if (user) {
       loadSchedule();
     }
   }, [user]);
+
+  useEffect(() => {
+    // Reload schedule entries when language changes to update the day names
+    if (!loading) {
+      loadSchedule();
+    }
+  }, [i18n.language]);
+
+  // Function to get English day name from translated day name
+  const getEnglishDayName = (translatedDay: string): DayOfWeek => {
+    const entry = Object.entries(DAYS_MAPPING).find(([_, translations]) =>
+      translations.includes(translatedDay)
+    );
+    return (entry ? entry[0] : 'Monday') as DayOfWeek;
+  };
+
+  // Function to get translated day name from English day name
+  const getTranslatedDayName = (englishDay: DayOfWeek): string => {
+    const translations = DAYS_MAPPING[englishDay];
+    if (i18n.language.startsWith('fr')) return translations[1];
+    if (i18n.language.startsWith('ar')) return translations[2];
+    return translations[0];
+  };
 
   async function loadSchedule() {
     try {
@@ -35,7 +78,7 @@ export function WeeklySchedule() {
       setScheduleEntries(data || []);
     } catch (error) {
       console.error('Error loading schedule:', error);
-      setMessage({ text: 'Failed to load schedule data', type: 'error' });
+      setMessage({ text: t('weeklySchedule.messages.loadError'), type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -63,7 +106,7 @@ export function WeeklySchedule() {
   };
 
   const handleDeleteEntry = async (entryId: string) => {
-    if (window.confirm('Are you sure you want to delete this schedule entry?')) {
+    if (window.confirm(t('weeklySchedule.messages.deleteConfirm'))) {
       try {
         const { error } = await supabase
           .from('teacher_weekly_schedules')
@@ -73,10 +116,10 @@ export function WeeklySchedule() {
         if (error) throw error;
 
         setScheduleEntries(scheduleEntries.filter(entry => entry.id !== entryId));
-        setMessage({ text: 'Schedule entry deleted successfully', type: 'success' });
+        setMessage({ text: t('weeklySchedule.messages.deleteSuccess'), type: 'success' });
       } catch (error) {
         console.error('Error deleting schedule entry:', error);
-        setMessage({ text: 'Failed to delete schedule entry', type: 'error' });
+        setMessage({ text: t('weeklySchedule.messages.deleteError'), type: 'error' });
       }
     }
   };
@@ -85,10 +128,11 @@ export function WeeklySchedule() {
     if (!editingEntry) return;
 
     try {
-      const { day_of_week, start_time, end_time, subject_class } = editingEntry;
+      const { start_time, end_time, subject_class } = editingEntry;
+      const day_of_week = getEnglishDayName(editingEntry.day_of_week);
 
       if (!day_of_week || !start_time || !end_time || !subject_class) {
-        setMessage({ text: 'Please fill in all required fields', type: 'error' });
+        setMessage({ text: t('weeklySchedule.messages.fillRequired'), type: 'error' });
         return;
       }
 
@@ -108,8 +152,8 @@ export function WeeklySchedule() {
         if (error) throw error;
 
         if (data && data.length > 0) {
-          setScheduleEntries([...scheduleEntries, data[0]]);
-          setMessage({ text: 'Schedule entry added successfully', type: 'success' });
+          setScheduleEntries([...scheduleEntries, data[0] as ScheduleEntry]);
+          setMessage({ text: t('weeklySchedule.messages.saveSuccess'), type: 'success' });
         }
       } else {
         // Update existing entry
@@ -126,27 +170,34 @@ export function WeeklySchedule() {
 
         if (error) throw error;
 
+        const updatedEntry: ScheduleEntry = {
+          ...editingEntry,
+          day_of_week,
+          start_time,
+          end_time,
+          subject_class,
+          updated_at: new Date().toISOString()
+        };
+
         setScheduleEntries(
           scheduleEntries.map(entry =>
-            entry.id === editingEntry.id
-              ? { ...entry, day_of_week, start_time, end_time, subject_class, updated_at: new Date().toISOString() }
-              : entry
+            entry.id === editingEntry.id ? updatedEntry : entry
           )
         );
-        setMessage({ text: 'Schedule entry updated successfully', type: 'success' });
+        setMessage({ text: t('weeklySchedule.messages.updateSuccess'), type: 'success' });
       }
 
       setIsModalOpen(false);
       setEditingEntry(null);
     } catch (error) {
       console.error('Error saving schedule entry:', error);
-      setMessage({ text: 'Failed to save schedule entry', type: 'error' });
+      setMessage({ text: t('weeklySchedule.messages.saveError'), type: 'error' });
     }
   };
 
   const groupedEntries = daysOfWeek.map(day => ({
     day,
-    entries: scheduleEntries.filter(entry => entry.day_of_week === day)
+    entries: scheduleEntries.filter(entry => getTranslatedDayName(entry.day_of_week) === day)
   }));
 
   if (loading) {
@@ -156,12 +207,12 @@ export function WeeklySchedule() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold">Weekly Schedule</h2>
+        <h2 className="text-xl font-semibold">{t('weeklySchedule.title')}</h2>
         <button
           onClick={handleAddEntry}
           className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Add Schedule Entry
+          {t('weeklySchedule.addEntry')}
         </button>
       </div>
 
@@ -192,20 +243,20 @@ export function WeeklySchedule() {
                         onClick={() => handleEditEntry(entry)}
                         className="text-indigo-600 hover:text-indigo-900 focus:outline-none"
                       >
-                        Edit
+                        {t('common.edit')}
                       </button>
                       <button
                         onClick={() => handleDeleteEntry(entry.id)}
                         className="text-red-600 hover:text-red-900 focus:outline-none"
                       >
-                        Delete
+                        {t('common.delete')}
                       </button>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="px-4 py-3 text-gray-500 italic">No schedule entries for this day</div>
+              <div className="px-4 py-3 text-gray-500 italic">{t('weeklySchedule.noEntries')}</div>
             )}
           </div>
         ))}
@@ -216,17 +267,21 @@ export function WeeklySchedule() {
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
             <h3 className="text-lg font-medium text-gray-900 mb-4">
-              {editingEntry?.isNew ? 'Add Schedule Entry' : 'Edit Schedule Entry'}
+              {editingEntry?.isNew ? t('weeklySchedule.addEntry') : t('weeklySchedule.editEntry')}
             </h3>
             <div className="space-y-4">
               <div>
                 <label htmlFor="day" className="block text-sm font-medium text-gray-700 mb-1">
-                  Day of Week
+                  {t('weeklySchedule.fields.dayOfWeek')}
                 </label>
                 <select
                   id="day"
-                  value={editingEntry?.day_of_week || ''}
-                  onChange={(e) => setEditingEntry(prev => prev ? { ...prev, day_of_week: e.target.value as any } : null)}
+                  value={editingEntry ? getTranslatedDayName(editingEntry.day_of_week) : ''}
+                  onChange={(e) => setEditingEntry(prev => {
+                    if (!prev) return null;
+                    const englishDay = getEnglishDayName(e.target.value);
+                    return { ...prev, day_of_week: englishDay };
+                  })}
                   className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 >
                   {daysOfWeek.map(day => (
@@ -236,7 +291,7 @@ export function WeeklySchedule() {
               </div>
               <div>
                 <label htmlFor="startTime" className="block text-sm font-medium text-gray-700 mb-1">
-                  Start Time
+                  {t('weeklySchedule.fields.startTime')}
                 </label>
                 <input
                   id="startTime"
@@ -249,7 +304,7 @@ export function WeeklySchedule() {
               </div>
               <div>
                 <label htmlFor="endTime" className="block text-sm font-medium text-gray-700 mb-1">
-                  End Time
+                  {t('weeklySchedule.fields.endTime')}
                 </label>
                 <input
                   id="endTime"
@@ -262,7 +317,7 @@ export function WeeklySchedule() {
               </div>
               <div>
                 <label htmlFor="subjectClass" className="block text-sm font-medium text-gray-700 mb-1">
-                  Subject/Class
+                  {t('weeklySchedule.fields.subjectClass')}
                 </label>
                 <input
                   id="subjectClass"
@@ -282,13 +337,13 @@ export function WeeklySchedule() {
                 }}
                 className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Cancel
+                {t('common.cancel')}
               </button>
               <button
                 onClick={handleSaveEntry}
                 className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Save
+                {t('common.save')}
               </button>
             </div>
           </div>

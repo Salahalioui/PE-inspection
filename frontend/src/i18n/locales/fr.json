@@ -17,6 +17,15 @@
     "required": "Champs obligatoires",
     "optional": "Optionnel"
   },
+  "days": {
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche"
+  },
   "auth": {
     "welcomeBack": "Bon retour!",
     "createAccount": "Créez votre compte",
@@ -39,18 +48,28 @@
       "createAccount": "Créer un compte"
     }
   },
-  "dashboard": {
-    "teacher": "Tableau de bord de l'enseignant",
-    "inspector": "Tableau de bord de l'inspecteur",
-    "user": {
-      "role": "Rôle"
+  "weeklySchedule": {
+    "title": "Emploi du temps hebdomadaire",
+    "addEntry": "Ajouter une entrée",
+    "editEntry": "Modifier l'entrée",
+    "noEntries": "Pas d'entrées pour ce jour",
+    "fields": {
+      "dayOfWeek": "Jour de la semaine",
+      "startTime": "Heure de début",
+      "endTime": "Heure de fin",
+      "subjectClass": "Matière/Classe"
     },
-    "navigation": {
-      "profile": "Profil",
-      "schedule": "Emploi du temps",
-      "lessons": "Leçons",
-      "absences": "Absences",
-      "progress": "Progrès"
+    "messages": {
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette entrée?",
+      "loadError": "Échec du chargement des données",
+      "deleteSuccess": "Entrée supprimée avec succès",
+      "deleteError": "Échec de la suppression de l'entrée",
+      "saveSuccess": "Entrée enregistrée avec succès",
+      "updateSuccess": "Entrée mise à jour avec succès",
+      "saveError": "Échec de l'enregistrement de l'entrée",
+      "fillRequired": "Veuillez remplir tous les champs obligatoires",
+      "entryAdded": "Nouvelle entrée ajoutée",
+      "entryUpdated": "Entrée mise à jour"
     }
   },
   "teacherProfile": {
@@ -97,6 +116,35 @@
       "submit": "Soumettre"
     }
   },
+  "lessonPlans": {
+    "title": "Plans de cours",
+    "addPlan": "Ajouter un plan",
+    "editPlan": "Modifier le plan",
+    "noPlans": "Aucun plan de cours. Cliquez sur \"Ajouter un plan\" pour créer votre premier.",
+    "fields": {
+      "lessonNumber": "Numéro de leçon",
+      "objectives": "Objectifs",
+      "status": "État",
+      "remarks": "Remarques",
+      "actions": "Actions",
+      "completionStatus": "Marquer comme terminé"
+    },
+    "status": {
+      "completed": "Terminé",
+      "notCompleted": "Non terminé"
+    },
+    "messages": {
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce plan?",
+      "loadError": "Échec du chargement des plans",
+      "deleteSuccess": "Plan supprimé avec succès",
+      "deleteError": "Échec de la suppression du plan",
+      "saveSuccess": "Plan enregistré avec succès",
+      "updateSuccess": "Plan mis à jour avec succès",
+      "saveError": "Échec de l'enregistrement du plan",
+      "fillRequired": "Veuillez remplir tous les champs obligatoires",
+      "statusUpdate": "Leçon {{number}} marquée comme {{status}}"
+    }
+  },
   "landing": {
     "title": "Plateforme des Inspecteurs d'EPS",
     "subtitle": "Optimisez la gestion et l'évaluation de l'enseignement de l'éducation physique en Algérie",
@@ -127,57 +175,6 @@
         "secure": "Gestion sécurisée des données",
         "responsive": "Design adaptatif pour tous les appareils"
       }
-    }
-  },
-  "weeklySchedule": {
-    "title": "Emploi du temps hebdomadaire",
-    "addEntry": "Ajouter une entrée",
-    "editEntry": "Modifier l'entrée",
-    "noEntries": "Pas d'entrées pour ce jour",
-    "fields": {
-      "dayOfWeek": "Jour de la semaine",
-      "startTime": "Heure de début",
-      "endTime": "Heure de fin",
-      "subjectClass": "Matière/Classe"
-    },
-    "messages": {
-      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette entrée?",
-      "loadError": "Échec du chargement des données",
-      "deleteSuccess": "Entrée supprimée avec succès",
-      "deleteError": "Échec de la suppression de l'entrée",
-      "saveSuccess": "Entrée enregistrée avec succès",
-      "updateSuccess": "Entrée mise à jour avec succès",
-      "saveError": "Échec de l'enregistrement de l'entrée",
-      "fillRequired": "Veuillez remplir tous les champs obligatoires"
-    }
-  },
-  "lessonPlans": {
-    "title": "Plans de cours",
-    "addPlan": "Ajouter un plan",
-    "editPlan": "Modifier le plan",
-    "noPlans": "Aucun plan de cours. Cliquez sur \"Ajouter un plan\" pour créer votre premier.",
-    "fields": {
-      "lessonNumber": "Numéro de leçon",
-      "objectives": "Objectifs",
-      "status": "État",
-      "remarks": "Remarques",
-      "actions": "Actions",
-      "completionStatus": "Marquer comme terminé"
-    },
-    "status": {
-      "completed": "Terminé",
-      "notCompleted": "Non terminé"
-    },
-    "messages": {
-      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce plan?",
-      "loadError": "Échec du chargement des plans",
-      "deleteSuccess": "Plan supprimé avec succès",
-      "deleteError": "Échec de la suppression du plan",
-      "saveSuccess": "Plan enregistré avec succès",
-      "updateSuccess": "Plan mis à jour avec succès",
-      "saveError": "Échec de l'enregistrement du plan",
-      "fillRequired": "Veuillez remplir tous les champs obligatoires",
-      "statusUpdate": "Leçon {{number}} marquée comme {{status}}"
     }
   },
   "inspector": {
