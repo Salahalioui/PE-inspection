@@ -48,6 +48,38 @@
       "createAccount": "إنشاء حساب"
     }
   },
+  "absenceTracker": {
+    "title": "سجل الغيابات",
+    "addAbsence": "إضافة غياب",
+    "editAbsence": "تعديل الغياب",
+    "noAbsences": "لا توجد تسجيلات غياب. انقر على \"إضافة غياب\" لإنشاء أول تسجيل",
+    "fields": {
+      "date": "تاريخ الغياب",
+      "motif": "سبب الغياب",
+      "remarks": "ملاحظات",
+      "actions": "إجراءات"
+    },
+    "table": {
+      "date": "التاريخ",
+      "motif": "السبب",
+      "remarks": "ملاحظات",
+      "actions": "إجراءات"
+    },
+    "form": {
+      "selectMotif": "اختر السبب"
+    },
+    "messages": {
+      "deleteConfirm": "هل أنت متأكد من حذف هذا الغياب؟",
+      "loadError": "فشل في تحميل بيانات الغياب",
+      "loadMotifsError": "فشل في تحميل أسباب الغياب",
+      "deleteSuccess": "تم حذف الغياب بنجاح",
+      "deleteError": "فشل في حذف الغياب",
+      "saveSuccess": "تم إضافة الغياب بنجاح",
+      "updateSuccess": "تم تحديث الغياب بنجاح",
+      "saveError": "فشل في حفظ الغياب",
+      "fillRequired": "يرجى ملء جميع الحقول المطلوبة"
+    }
+  },
   "weeklySchedule": {
     "title": "الجدول الأسبوعي",
     "addEntry": "إضافة حصة جديدة",

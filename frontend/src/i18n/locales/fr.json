@@ -48,6 +48,38 @@
       "createAccount": "Créer un compte"
     }
   },
+  "absenceTracker": {
+    "title": "Registre des absences",
+    "addAbsence": "Ajouter une absence",
+    "editAbsence": "Modifier l'absence",
+    "noAbsences": "Aucune absence enregistrée. Cliquez sur \"Ajouter une absence\" pour créer votre premier enregistrement.",
+    "fields": {
+      "date": "Date d'absence",
+      "motif": "Motif d'absence",
+      "remarks": "Remarques",
+      "actions": "Actions"
+    },
+    "table": {
+      "date": "Date",
+      "motif": "Motif",
+      "remarks": "Remarques",
+      "actions": "Actions"
+    },
+    "form": {
+      "selectMotif": "Sélectionner un motif"
+    },
+    "messages": {
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet enregistrement d'absence?",
+      "loadError": "Échec du chargement des données d'absence",
+      "loadMotifsError": "Échec du chargement des motifs d'absence",
+      "deleteSuccess": "Absence supprimée avec succès",
+      "deleteError": "Échec de la suppression de l'absence",
+      "saveSuccess": "Absence ajoutée avec succès",
+      "updateSuccess": "Absence mise à jour avec succès",
+      "saveError": "Échec de l'enregistrement de l'absence",
+      "fillRequired": "Veuillez remplir tous les champs obligatoires"
+    }
+  },
   "weeklySchedule": {
     "title": "Emploi du temps hebdomadaire",
     "addEntry": "Ajouter une entrée",

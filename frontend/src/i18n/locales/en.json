@@ -48,6 +48,38 @@
       "createAccount": "Create account"
     }
   },
+  "absenceTracker": {
+    "title": "Absence Records",
+    "addAbsence": "Add Absence",
+    "editAbsence": "Edit Absence Record",
+    "noAbsences": "No absence records yet. Click \"Add Absence\" to create your first record.",
+    "fields": {
+      "date": "Absence Date",
+      "motif": "Absence Motif",
+      "remarks": "Remarks",
+      "actions": "Actions"
+    },
+    "table": {
+      "date": "Date",
+      "motif": "Motif",
+      "remarks": "Remarks",
+      "actions": "Actions"
+    },
+    "form": {
+      "selectMotif": "Select a motif"
+    },
+    "messages": {
+      "deleteConfirm": "Are you sure you want to delete this absence record?",
+      "loadError": "Failed to load absence data",
+      "loadMotifsError": "Failed to load absence motifs",
+      "deleteSuccess": "Absence record deleted successfully",
+      "deleteError": "Failed to delete absence record",
+      "saveSuccess": "Absence record added successfully",
+      "updateSuccess": "Absence record updated successfully",
+      "saveError": "Failed to save absence record",
+      "fillRequired": "Please fill in all required fields"
+    }
+  },
   "weeklySchedule": {
     "title": "Weekly Schedule",
     "addEntry": "Add Schedule Entry",

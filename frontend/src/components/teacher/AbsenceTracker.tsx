@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
 import type { Absence as AbsenceType, AbsenceMotif } from '../../lib/supabase';
@@ -6,6 +7,7 @@ import type { Absence as AbsenceType, AbsenceMotif } from '../../lib/supabase';
 type AbsenceWithMotif = AbsenceType & { motif?: AbsenceMotif, isNew?: boolean };
 
 export function AbsenceTracker() {
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [absences, setAbsences] = useState<AbsenceWithMotif[]>([]);
@@ -15,14 +17,11 @@ export function AbsenceTracker() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    console.log('User state:', user); // Debug log
     if (user) {
-      console.log('Loading data for user:', user.id); // Debug log
       Promise.all([
         loadAbsences(),
         loadMotifs()
       ]).then(() => {
-        console.log('Finished loading data'); // Debug log
         setLoading(false);
       });
     }
@@ -41,7 +40,6 @@ export function AbsenceTracker() {
 
       if (error) throw error;
       
-      // Transform the data to match our expected type
       const formattedData = data?.map(item => ({
         ...item,
         motif: item.absence_motif as unknown as AbsenceMotif,
@@ -51,38 +49,29 @@ export function AbsenceTracker() {
       setAbsences(formattedData);
     } catch (error) {
       console.error('Error loading absences:', error);
-      setMessage({ text: 'Failed to load absence data', type: 'error' });
+      setMessage({ text: t('absenceTracker.messages.loadError'), type: 'error' });
     }
   }
 
   async function loadMotifs() {
     try {
-      console.log('Starting to load motifs...'); // Debug log
       const { data, error } = await supabase
         .from('absence_motifs')
         .select('id, motif_label_fr, motif_label_ar, created_at, updated_at')
         .order('motif_label_fr', { ascending: true });
 
-      if (error) {
-        console.error('Supabase error:', error); // Debug log
-        throw error;
-      }
-
-      console.log('Motifs response:', { data, error }); // Debug log
-      
-      if (!data) {
-        console.warn('No motifs data received'); // Debug log
-        setMotifs([]);
-        return;
-      }
-
-      console.log('Setting motifs:', data); // Debug log
-      setMotifs(data);
+      if (error) throw error;
+      setMotifs(data || []);
     } catch (error) {
       console.error('Error loading motifs:', error);
-      setMessage({ text: 'Failed to load absence motifs', type: 'error' });
+      setMessage({ text: t('absenceTracker.messages.loadMotifsError'), type: 'error' });
     }
   }
+
+  const getMotifLabel = (motif?: AbsenceMotif) => {
+    if (!motif) return '-';
+    return i18n.language.startsWith('ar') ? motif.motif_label_ar : motif.motif_label_fr;
+  };
 
   const handleAddAbsence = () => {
     const newAbsence: AbsenceWithMotif = {
@@ -105,7 +94,7 @@ export function AbsenceTracker() {
   };
 
   const handleDeleteAbsence = async (absenceId: string) => {
-    if (window.confirm('Are you sure you want to delete this absence record?')) {
+    if (window.confirm(t('absenceTracker.messages.deleteConfirm'))) {
       try {
         const { error } = await supabase
           .from('absences')
@@ -115,10 +104,10 @@ export function AbsenceTracker() {
         if (error) throw error;
 
         setAbsences(absences.filter(absence => absence.id !== absenceId));
-        setMessage({ text: 'Absence record deleted successfully', type: 'success' });
+        setMessage({ text: t('absenceTracker.messages.deleteSuccess'), type: 'success' });
       } catch (error) {
         console.error('Error deleting absence:', error);
-        setMessage({ text: 'Failed to delete absence record', type: 'error' });
+        setMessage({ text: t('absenceTracker.messages.deleteError'), type: 'error' });
       }
     }
   };
@@ -130,7 +119,7 @@ export function AbsenceTracker() {
       const { absence_date, absence_motif_id, remarks } = editingAbsence;
 
       if (!absence_date || !absence_motif_id) {
-        setMessage({ text: 'Please fill in all required fields', type: 'error' });
+        setMessage({ text: t('absenceTracker.messages.fillRequired'), type: 'error' });
         return;
       }
 
@@ -152,19 +141,17 @@ export function AbsenceTracker() {
         if (error) throw error;
 
         if (data && data.length > 0) {
-          // Transform the data to match our expected type
           const formattedData = data.map(item => ({
             ...item,
             motif: item.absence_motif as unknown as AbsenceMotif,
             absence_motif_id: item.absence_motif_id as string
-          }));
-          
-          setAbsences([...formattedData, ...absences]);
-          setMessage({ text: 'Absence record added successfully', type: 'success' });
+          }))[0];
+          setAbsences([formattedData, ...absences]);
+          setMessage({ text: t('absenceTracker.messages.saveSuccess'), type: 'success' });
         }
       } else {
         // Update existing absence record
-        const { data, error } = await supabase
+        const { error } = await supabase
           .from('absences')
           .update({
             absence_date,
@@ -172,36 +159,33 @@ export function AbsenceTracker() {
             remarks,
             updated_at: new Date().toISOString()
           })
-          .eq('id', editingAbsence.id)
-          .select(`
-            *,
-            absence_motif:absence_motif_id(id, motif_label_ar, motif_label_fr)
-          `);
+          .eq('id', editingAbsence.id);
 
         if (error) throw error;
 
-        if (data && data.length > 0) {
-          // Transform the data to match our expected type
-          const formattedData = data.map(item => ({
-            ...item,
-            motif: item.absence_motif as unknown as AbsenceMotif,
-            absence_motif_id: item.absence_motif_id as string
-          }))[0];
-          
-          setAbsences(
-            absences.map(absence =>
-              absence.id === editingAbsence.id ? formattedData : absence
-            )
-          );
-          setMessage({ text: 'Absence record updated successfully', type: 'success' });
-        }
+        const updatedMotif = motifs.find(m => m.id === absence_motif_id);
+        const updatedAbsence = {
+          ...editingAbsence,
+          absence_date,
+          absence_motif_id,
+          motif: updatedMotif,
+          remarks,
+          updated_at: new Date().toISOString()
+        };
+
+        setAbsences(
+          absences.map(absence =>
+            absence.id === editingAbsence.id ? updatedAbsence : absence
+          )
+        );
+        setMessage({ text: t('absenceTracker.messages.updateSuccess'), type: 'success' });
       }
 
       setIsModalOpen(false);
       setEditingAbsence(null);
     } catch (error) {
       console.error('Error saving absence:', error);
-      setMessage({ text: 'Failed to save absence record', type: 'error' });
+      setMessage({ text: t('absenceTracker.messages.saveError'), type: 'error' });
     }
   };
 
@@ -212,12 +196,12 @@ export function AbsenceTracker() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold">Absence Records</h2>
+        <h2 className="text-xl font-semibold">{t('absenceTracker.title')}</h2>
         <button
           onClick={handleAddAbsence}
           className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Add Absence
+          {t('absenceTracker.addAbsence')}
         </button>
       </div>
 
@@ -233,16 +217,16 @@ export function AbsenceTracker() {
             <thead className="bg-gray-50">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date
+                  {t('absenceTracker.table.date')}
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Motif
+                  {t('absenceTracker.table.motif')}
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Remarks
+                  {t('absenceTracker.table.remarks')}
                 </th>
                 <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                  {t('absenceTracker.table.actions')}
                 </th>
               </tr>
             </thead>
@@ -250,10 +234,10 @@ export function AbsenceTracker() {
               {absences.map((absence) => (
                 <tr key={absence.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {new Date(absence.absence_date).toLocaleDateString()}
+                    {new Date(absence.absence_date).toLocaleDateString(i18n.language)}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500">
-                    {absence.motif?.motif_label_fr || '-'}
+                    {getMotifLabel(absence.motif)}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500">
                     {absence.remarks || '-'}
@@ -263,13 +247,13 @@ export function AbsenceTracker() {
                       onClick={() => handleEditAbsence(absence)}
                       className="text-indigo-600 hover:text-indigo-900 mr-4"
                     >
-                      Edit
+                      {t('common.edit')}
                     </button>
                     <button
                       onClick={() => handleDeleteAbsence(absence.id)}
                       className="text-red-600 hover:text-red-900"
                     >
-                      Delete
+                      {t('common.delete')}
                     </button>
                   </td>
                 </tr>
@@ -279,7 +263,7 @@ export function AbsenceTracker() {
         </div>
       ) : (
         <div className="bg-white shadow rounded-lg p-6 text-center text-gray-500">
-          No absence records yet. Click "Add Absence" to create your first record.
+          {t('absenceTracker.noAbsences')}
         </div>
       )}
 
@@ -288,12 +272,12 @@ export function AbsenceTracker() {
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
             <h3 className="text-lg font-medium text-gray-900 mb-4">
-              {editingAbsence?.isNew ? 'Add Absence Record' : 'Edit Absence Record'}
+              {editingAbsence?.isNew ? t('absenceTracker.addAbsence') : t('absenceTracker.editAbsence')}
             </h3>
             <div className="space-y-4">
               <div>
                 <label htmlFor="absenceDate" className="block text-sm font-medium text-gray-700 mb-1">
-                  Absence Date
+                  {t('absenceTracker.fields.date')}
                 </label>
                 <input
                   id="absenceDate"
@@ -306,7 +290,7 @@ export function AbsenceTracker() {
               </div>
               <div>
                 <label htmlFor="absenceMotif" className="block text-sm font-medium text-gray-700 mb-1">
-                  Absence Motif
+                  {t('absenceTracker.fields.motif')}
                 </label>
                 <select
                   id="absenceMotif"
@@ -315,17 +299,17 @@ export function AbsenceTracker() {
                   className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                   required
                 >
-                  <option value="">Select a motif</option>
+                  <option value="">{t('absenceTracker.form.selectMotif')}</option>
                   {motifs.map(motif => (
                     <option key={motif.id} value={motif.id}>
-                      {motif.motif_label_fr} ({motif.motif_label_ar})
+                      {getMotifLabel(motif)}
                     </option>
                   ))}
                 </select>
               </div>
               <div>
                 <label htmlFor="remarks" className="block text-sm font-medium text-gray-700 mb-1">
-                  Remarks (Optional)
+                  {t('absenceTracker.fields.remarks')} ({t('common.optional')})
                 </label>
                 <textarea
                   id="remarks"
@@ -344,13 +328,13 @@ export function AbsenceTracker() {
                 }}
                 className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Cancel
+                {t('common.cancel')}
               </button>
               <button
                 onClick={handleSaveAbsence}
                 className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Save
+                {t('common.save')}
               </button>
             </div>
           </div>
