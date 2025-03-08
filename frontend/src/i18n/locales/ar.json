@@ -48,6 +48,38 @@
       "createAccount": "إنشاء حساب"
     }
   },
+  "progressReports": {
+    "title": "تقارير التقدم",
+    "cards": {
+      "lessonCompletion": {
+        "title": "إكمال الدروس",
+        "percentage": "{{percentage}}%",
+        "status": "تم إكمال {{completed}} من {{total}} درس"
+      },
+      "absences": {
+        "title": "الغيابات",
+        "total": "إجمالي الغيابات المسجلة"
+      }
+    },
+    "monthlyProgress": {
+      "title": "التقدم الشهري",
+      "noData": "لا توجد بيانات شهرية متاحة حتى الآن.",
+      "lessons": "{{completed}}/{{total}} درس",
+      "absences": {
+        "singular": "غياب واحد",
+        "plural": "{{count}} غيابات"
+      }
+    },
+    "summary": {
+      "title": "الملخص",
+      "completion": "لقد أكملت {{completed}} من أصل {{total}} درس (نسبة الإكمال {{percentage}}%).",
+      "absences": "لديك {{count}} غياب في المجموع."
+    },
+    "messages": {
+      "loadLessonError": "فشل في تحميل بيانات الدروس",
+      "loadAbsenceError": "فشل في تحميل بيانات الغياب"
+    }
+  },
   "absenceTracker": {
     "title": "سجل الغيابات",
     "addAbsence": "إضافة غياب",

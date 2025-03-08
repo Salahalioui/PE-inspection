@@ -48,6 +48,38 @@
       "createAccount": "Créer un compte"
     }
   },
+  "progressReports": {
+    "title": "Rapports de progression",
+    "cards": {
+      "lessonCompletion": {
+        "title": "Progression des leçons",
+        "percentage": "{{percentage}}%",
+        "status": "{{completed}} sur {{total}} leçons terminées"
+      },
+      "absences": {
+        "title": "Absences",
+        "total": "Total des absences enregistrées"
+      }
+    },
+    "monthlyProgress": {
+      "title": "Progression mensuelle",
+      "noData": "Aucune donnée mensuelle disponible pour le moment.",
+      "lessons": "{{completed}}/{{total}} leçons",
+      "absences": {
+        "singular": "{{count}} absence",
+        "plural": "{{count}} absences"
+      }
+    },
+    "summary": {
+      "title": "Résumé",
+      "completion": "Vous avez terminé {{completed}} sur {{total}} leçons (taux de complétion {{percentage}}%).",
+      "absences": "Vous avez enregistré {{count}} absences au total."
+    },
+    "messages": {
+      "loadLessonError": "Échec du chargement des données des leçons",
+      "loadAbsenceError": "Échec du chargement des données d'absence"
+    }
+  },
   "absenceTracker": {
     "title": "Registre des absences",
     "addAbsence": "Ajouter une absence",

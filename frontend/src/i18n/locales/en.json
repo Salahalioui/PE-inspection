@@ -48,6 +48,38 @@
       "createAccount": "Create account"
     }
   },
+  "progressReports": {
+    "title": "Progress Reports",
+    "cards": {
+      "lessonCompletion": {
+        "title": "Lesson Completion",
+        "percentage": "{{percentage}}%",
+        "status": "{{completed}} of {{total}} lessons completed"
+      },
+      "absences": {
+        "title": "Absences",
+        "total": "Total absences recorded"
+      }
+    },
+    "monthlyProgress": {
+      "title": "Monthly Progress",
+      "noData": "No monthly data available yet.",
+      "lessons": "{{completed}}/{{total}} lessons",
+      "absences": {
+        "singular": "{{count}} absence",
+        "plural": "{{count}} absences"
+      }
+    },
+    "summary": {
+      "title": "Summary",
+      "completion": "You have completed {{completed}} out of {{total}} lessons ({{percentage}}% completion rate).",
+      "absences": "You have recorded {{count}} absences in total."
+    },
+    "messages": {
+      "loadLessonError": "Failed to load lesson plan data",
+      "loadAbsenceError": "Failed to load absence data"
+    }
+  },
   "absenceTracker": {
     "title": "Absence Records",
     "addAbsence": "Add Absence",

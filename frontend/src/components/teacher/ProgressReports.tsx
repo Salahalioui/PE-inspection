@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
 
@@ -12,6 +13,7 @@ type ProgressStats = {
 };
 
 export function ProgressReports() {
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<ProgressStats>({
@@ -23,6 +25,9 @@ export function ProgressReports() {
     lessonsByMonth: {},
   });
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+
+  // RTL support
+  const isRTL = i18n.language === 'ar';
 
   useEffect(() => {
     if (user) {
@@ -74,7 +79,7 @@ export function ProgressReports() {
       }
     } catch (error) {
       console.error('Error loading lesson plans:', error);
-      setMessage({ text: 'Failed to load lesson plan data', type: 'error' });
+      setMessage({ text: t('progressReports.messages.loadLessonError'), type: 'error' });
     }
   }
 
@@ -112,7 +117,7 @@ export function ProgressReports() {
       }
     } catch (error) {
       console.error('Error loading absences:', error);
-      setMessage({ text: 'Failed to load absence data', type: 'error' });
+      setMessage({ text: t('progressReports.messages.loadAbsenceError'), type: 'error' });
     }
   }
 
@@ -120,7 +125,7 @@ export function ProgressReports() {
   const formatMonth = (monthKey: string) => {
     const [year, month] = monthKey.split('-');
     const date = new Date(parseInt(year), parseInt(month) - 1, 1);
-    return date.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+    return date.toLocaleDateString(i18n.language, { month: 'long', year: 'numeric' });
   };
 
   if (loading) {
@@ -128,8 +133,8 @@ export function ProgressReports() {
   }
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-6">Progress Reports</h2>
+    <div className={isRTL ? 'rtl' : 'ltr'}>
+      <h2 className="text-xl font-semibold mb-6">{t('progressReports.title')}</h2>
       
       {message && (
         <div className={`p-4 mb-6 rounded-md ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
@@ -140,11 +145,18 @@ export function ProgressReports() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Lesson Completion Card */}
         <div className="bg-white shadow rounded-lg p-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Lesson Completion</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">{t('progressReports.cards.lessonCompletion.title')}</h3>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-3xl font-bold text-indigo-600">{stats.completionPercentage.toFixed(1)}%</p>
-              <p className="text-sm text-gray-500">{stats.completedLessons} of {stats.totalLessons} lessons completed</p>
+              <p className="text-3xl font-bold text-indigo-600">
+                {t('progressReports.cards.lessonCompletion.percentage', { percentage: stats.completionPercentage.toFixed(1) })}
+              </p>
+              <p className="text-sm text-gray-500">
+                {t('progressReports.cards.lessonCompletion.status', {
+                  completed: stats.completedLessons,
+                  total: stats.totalLessons
+                })}
+              </p>
             </div>
             <div className="relative h-16 w-16">
               <svg className="h-full w-full" viewBox="0 0 36 36">
@@ -167,17 +179,17 @@ export function ProgressReports() {
 
         {/* Absences Card */}
         <div className="bg-white shadow rounded-lg p-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Absences</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">{t('progressReports.cards.absences.title')}</h3>
           <div>
             <p className="text-3xl font-bold text-indigo-600">{stats.totalAbsences}</p>
-            <p className="text-sm text-gray-500">Total absences recorded</p>
+            <p className="text-sm text-gray-500">{t('progressReports.cards.absences.total')}</p>
           </div>
         </div>
       </div>
 
       {/* Monthly Progress */}
       <div className="bg-white shadow rounded-lg p-6 mb-8">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Monthly Progress</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">{t('progressReports.monthlyProgress.title')}</h3>
         
         {Object.keys(stats.lessonsByMonth).length > 0 ? (
           <div className="space-y-4">
@@ -196,10 +208,15 @@ export function ProgressReports() {
                       <h4 className="font-medium">{formatMonth(monthKey)}</h4>
                       <div className="flex space-x-4 text-sm">
                         <span className="text-gray-500">
-                          {monthData.completed}/{monthData.total} lessons
+                          {t('progressReports.monthlyProgress.lessons', {
+                            completed: monthData.completed,
+                            total: monthData.total
+                          })}
                         </span>
                         <span className="text-gray-500">
-                          {absences} {absences === 1 ? 'absence' : 'absences'}
+                          {t('progressReports.monthlyProgress.absences', {
+                            count: absences
+                          })}
                         </span>
                       </div>
                     </div>
@@ -214,19 +231,22 @@ export function ProgressReports() {
               })}
           </div>
         ) : (
-          <p className="text-gray-500 text-center py-4">No monthly data available yet.</p>
+          <p className="text-gray-500 text-center py-4">{t('progressReports.monthlyProgress.noData')}</p>
         )}
       </div>
 
       {/* Summary */}
       <div className="bg-white shadow rounded-lg p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Summary</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">{t('progressReports.summary.title')}</h3>
         <p className="text-gray-600 mb-2">
-          You have completed <span className="font-medium">{stats.completedLessons}</span> out of <span className="font-medium">{stats.totalLessons}</span> lessons 
-          ({stats.completionPercentage.toFixed(1)}% completion rate).
+          {t('progressReports.summary.completion', {
+            completed: stats.completedLessons,
+            total: stats.totalLessons,
+            percentage: stats.completionPercentage.toFixed(1)
+          })}
         </p>
         <p className="text-gray-600">
-          You have recorded <span className="font-medium">{stats.totalAbsences}</span> absences in total.
+          {t('progressReports.summary.absences', { count: stats.totalAbsences })}
         </p>
       </div>
     </div>
