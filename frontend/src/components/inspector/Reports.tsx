@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '../../lib/supabase';
 
 interface TeacherStats {
@@ -13,11 +14,15 @@ interface TeacherStats {
 }
 
 export function Reports() {
+  const { t, i18n } = useTranslation();
   const [teacherStats, setTeacherStats] = useState<TeacherStats[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterText, setFilterText] = useState('');
   const [sortBy, setSortBy] = useState<keyof TeacherStats>('full_name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+
+  // RTL support
+  const isRTL = i18n.language === 'ar';
 
   useEffect(() => {
     fetchTeacherStats();
@@ -114,16 +119,16 @@ export function Reports() {
   };
 
   if (loading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return <div className="text-center py-8">{t('common.loading')}</div>;
   }
 
   return (
-    <div className="space-y-6">
+    <div className={`space-y-6 ${isRTL ? 'rtl' : 'ltr'}`}>
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-gray-800">Teacher Statistics</h2>
+        <h2 className="text-xl font-semibold text-gray-800">{t('inspectorReports.title')}</h2>
         <input
           type="text"
-          placeholder="Search teachers..."
+          placeholder={t('inspectorReports.search')}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
           className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -138,45 +143,45 @@ export function Reports() {
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort('full_name')}
               >
-                Teacher Name
+                {t('inspectorReports.table.teacherName')}
                 {sortBy === 'full_name' && (
-                  <span className="ml-1">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                  <span className={`${isRTL ? 'mr-1' : 'ml-1'}`}>{sortDirection === 'asc' ? '↑' : '↓'}</span>
                 )}
               </th>
               <th 
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort('work_institution')}
               >
-                Institution
+                {t('inspectorReports.table.institution')}
                 {sortBy === 'work_institution' && (
-                  <span className="ml-1">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                  <span className={`${isRTL ? 'mr-1' : 'ml-1'}`}>{sortDirection === 'asc' ? '↑' : '↓'}</span>
                 )}
               </th>
               <th 
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort('lesson_completion')}
               >
-                Lesson Completion
+                {t('inspectorReports.table.lessonCompletion')}
                 {sortBy === 'lesson_completion' && (
-                  <span className="ml-1">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                  <span className={`${isRTL ? 'mr-1' : 'ml-1'}`}>{sortDirection === 'asc' ? '↑' : '↓'}</span>
                 )}
               </th>
               <th 
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort('absence_count')}
               >
-                Absences
+                {t('inspectorReports.table.absences')}
                 {sortBy === 'absence_count' && (
-                  <span className="ml-1">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                  <span className={`${isRTL ? 'mr-1' : 'ml-1'}`}>{sortDirection === 'asc' ? '↑' : '↓'}</span>
                 )}
               </th>
               <th 
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort('field_visit_count')}
               >
-                Field Visits
+                {t('inspectorReports.table.fieldVisits')}
                 {sortBy === 'field_visit_count' && (
-                  <span className="ml-1">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                  <span className={`${isRTL ? 'mr-1' : 'ml-1'}`}>{sortDirection === 'asc' ? '↑' : '↓'}</span>
                 )}
               </th>
             </tr>
@@ -188,7 +193,7 @@ export function Reports() {
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.work_institution}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
-                    <span className="mr-2">{teacher.lesson_completion}%</span>
+                    <span className={`${isRTL ? 'ml-2' : 'mr-2'}`}>{teacher.lesson_completion}%</span>
                     <div className="w-24 h-2 bg-gray-200 rounded-full">
                       <div
                         className="h-full bg-blue-600 rounded-full"
@@ -215,14 +220,14 @@ export function Reports() {
         </table>
         {filteredStats.length === 0 && (
           <div className="text-center py-4 text-gray-500">
-            No teachers found
+            {t('inspectorReports.noTeachers')}
           </div>
         )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Average Lesson Completion</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">{t('inspectorReports.stats.averageCompletion')}</h3>
           <p className="text-3xl font-bold text-blue-600">
             {Math.round(
               teacherStats.reduce((sum, t) => sum + t.lesson_completion, 0) / teacherStats.length
@@ -231,21 +236,21 @@ export function Reports() {
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Total Field Visits</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">{t('inspectorReports.stats.totalFieldVisits')}</h3>
           <p className="text-3xl font-bold text-green-600">
             {teacherStats.reduce((sum, t) => sum + t.field_visit_count, 0)}
           </p>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Total Teachers</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">{t('inspectorReports.stats.totalTeachers')}</h3>
           <p className="text-3xl font-bold text-purple-600">
             {teacherStats.length}
           </p>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Total Absences</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">{t('inspectorReports.stats.totalAbsences')}</h3>
           <p className="text-3xl font-bold text-red-600">
             {teacherStats.reduce((sum, t) => sum + t.absence_count, 0)}
           </p>

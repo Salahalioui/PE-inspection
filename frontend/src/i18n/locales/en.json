@@ -48,6 +48,24 @@
       "createAccount": "Create account"
     }
   },
+  "inspectorReports": {
+    "title": "Teacher Statistics",
+    "search": "Search teachers...",
+    "table": {
+      "teacherName": "Teacher Name",
+      "institution": "Institution",
+      "lessonCompletion": "Lesson Completion",
+      "absences": "Absences",
+      "fieldVisits": "Field Visits"
+    },
+    "noTeachers": "No teachers found",
+    "stats": {
+      "averageCompletion": "Average Lesson Completion",
+      "totalFieldVisits": "Total Field Visits",
+      "totalTeachers": "Total Teachers",
+      "totalAbsences": "Total Absences"
+    }
+  },
   "fieldVisit": {
     "title": "New Field Visit Report",
     "form": {
