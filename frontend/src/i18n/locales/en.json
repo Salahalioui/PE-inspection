@@ -48,6 +48,23 @@
       "createAccount": "Create account"
     }
   },
+  "inspectorTeacherList": {
+    "title": "Teacher List",
+    "search": "Search teachers...",
+    "table": {
+      "name": "Name",
+      "institution": "Institution",
+      "level": "Level",
+      "appointmentDate": "Appointment Date",
+      "actions": "Actions"
+    },
+    "actions": {
+      "viewDetails": "View Details"
+    },
+    "noTeachers": "No teachers found",
+    "loading": "Loading...",
+    "error": "Error fetching teachers"
+  },
   "progressReports": {
     "title": "Progress Reports",
     "cards": {
@@ -65,113 +82,18 @@
       "title": "Monthly Progress",
       "noData": "No monthly data available yet.",
       "lessons": "{{completed}}/{{total}} lessons",
-      "absences": {
-        "singular": "{{count}} absence",
-        "plural": "{{count}} absences"
-      }
+      "absencesCount": "{{count}} absence",
+      "absencesCountPlural": "{{count}} absences"
     },
     "summary": {
       "title": "Summary",
       "completion": "You have completed {{completed}} out of {{total}} lessons ({{percentage}}% completion rate).",
-      "absences": "You have recorded {{count}} absences in total."
+      "absencesCount": "You have recorded {{count}} absence.",
+      "absencesCountPlural": "You have recorded {{count}} absences."
     },
     "messages": {
       "loadLessonError": "Failed to load lesson plan data",
       "loadAbsenceError": "Failed to load absence data"
-    }
-  },
-  "absenceTracker": {
-    "title": "Absence Records",
-    "addAbsence": "Add Absence",
-    "editAbsence": "Edit Absence Record",
-    "noAbsences": "No absence records yet. Click \"Add Absence\" to create your first record.",
-    "fields": {
-      "date": "Absence Date",
-      "motif": "Absence Motif",
-      "remarks": "Remarks",
-      "actions": "Actions"
-    },
-    "table": {
-      "date": "Date",
-      "motif": "Motif",
-      "remarks": "Remarks",
-      "actions": "Actions"
-    },
-    "form": {
-      "selectMotif": "Select a motif"
-    },
-    "messages": {
-      "deleteConfirm": "Are you sure you want to delete this absence record?",
-      "loadError": "Failed to load absence data",
-      "loadMotifsError": "Failed to load absence motifs",
-      "deleteSuccess": "Absence record deleted successfully",
-      "deleteError": "Failed to delete absence record",
-      "saveSuccess": "Absence record added successfully",
-      "updateSuccess": "Absence record updated successfully",
-      "saveError": "Failed to save absence record",
-      "fillRequired": "Please fill in all required fields"
-    }
-  },
-  "weeklySchedule": {
-    "title": "Weekly Schedule",
-    "addEntry": "Add Schedule Entry",
-    "editEntry": "Edit Schedule Entry",
-    "noEntries": "No schedule entries for this day",
-    "fields": {
-      "dayOfWeek": "Day of Week",
-      "startTime": "Start Time",
-      "endTime": "End Time",
-      "subjectClass": "Subject/Class"
-    },
-    "messages": {
-      "deleteConfirm": "Are you sure you want to delete this schedule entry?",
-      "loadError": "Failed to load schedule data",
-      "deleteSuccess": "Schedule entry deleted successfully",
-      "deleteError": "Failed to delete schedule entry",
-      "saveSuccess": "Schedule entry saved successfully",
-      "updateSuccess": "Schedule entry updated successfully",
-      "saveError": "Failed to save schedule entry",
-      "fillRequired": "Please fill in all required fields",
-      "entryAdded": "New schedule entry added",
-      "entryUpdated": "Schedule entry updated"
-    }
-  },
-  "lessonPlans": {
-    "title": "Lesson Plans",
-    "addPlan": "Add Lesson Plan",
-    "editPlan": "Edit Lesson Plan",
-    "noPlans": "No lesson plans yet. Click \"Add Lesson Plan\" to create your first one.",
-    "fields": {
-      "lessonNumber": "Lesson Number",
-      "objectives": "Objectives",
-      "status": "Status",
-      "remarks": "Remarks",
-      "actions": "Actions",
-      "completionStatus": "Mark as completed"
-    },
-    "table": {
-      "lessonNumber": "Lesson #",
-      "objectives": "Objectives",
-      "status": "Status",
-      "remarks": "Remarks",
-      "actions": "Actions",
-      "optional": "Optional"
-    },
-    "status": {
-      "completed": "Completed",
-      "notCompleted": "Not Completed"
-    },
-    "messages": {
-      "deleteConfirm": "Are you sure you want to delete this lesson plan?",
-      "loadError": "Failed to load lesson plans",
-      "deleteSuccess": "Lesson plan deleted successfully",
-      "deleteError": "Failed to delete lesson plan",
-      "saveSuccess": "Lesson plan added successfully",
-      "updateSuccess": "Lesson plan updated successfully",
-      "saveError": "Failed to save lesson plan",
-      "fillRequired": "Please fill in all required fields",
-      "statusUpdate": "Lesson {{number}} marked as {{status}}",
-      "statusUpdateError": "Failed to update lesson plan status"
     }
   },
   "teacherProfile": {

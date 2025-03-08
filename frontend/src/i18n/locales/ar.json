@@ -48,6 +48,23 @@
       "createAccount": "إنشاء حساب"
     }
   },
+  "inspectorTeacherList": {
+    "title": "قائمة المعلمين",
+    "search": "البحث عن المعلمين...",
+    "table": {
+      "name": "الاسم",
+      "institution": "المؤسسة",
+      "level": "المستوى",
+      "appointmentDate": "تاريخ التعيين",
+      "actions": "الإجراءات"
+    },
+    "actions": {
+      "viewDetails": "عرض التفاصيل"
+    },
+    "noTeachers": "لم يتم العثور على معلمين",
+    "loading": "جاري التحميل...",
+    "error": "خطأ في تحميل بيانات المعلمين"
+  },
   "progressReports": {
     "title": "تقارير التقدم",
     "cards": {
@@ -65,113 +82,17 @@
       "title": "التقدم الشهري",
       "noData": "لا توجد بيانات شهرية متاحة حتى الآن.",
       "lessons": "{{completed}}/{{total}} درس",
-      "absences": {
-        "singular": "غياب واحد",
-        "plural": "{{count}} غيابات"
-      }
+      "absencesCount": "غياب واحد",
+      "absencesCountPlural": "{{count}} غيابات"
     },
     "summary": {
       "title": "الملخص",
       "completion": "لقد أكملت {{completed}} من أصل {{total}} درس (نسبة الإكمال {{percentage}}%).",
-      "absences": "لديك {{count}} غياب في المجموع."
+      "absencesCount": "لديك {{count}} غياب في المجموع."
     },
     "messages": {
       "loadLessonError": "فشل في تحميل بيانات الدروس",
       "loadAbsenceError": "فشل في تحميل بيانات الغياب"
-    }
-  },
-  "absenceTracker": {
-    "title": "سجل الغيابات",
-    "addAbsence": "إضافة غياب",
-    "editAbsence": "تعديل الغياب",
-    "noAbsences": "لا توجد تسجيلات غياب. انقر على \"إضافة غياب\" لإنشاء أول تسجيل",
-    "fields": {
-      "date": "تاريخ الغياب",
-      "motif": "سبب الغياب",
-      "remarks": "ملاحظات",
-      "actions": "إجراءات"
-    },
-    "table": {
-      "date": "التاريخ",
-      "motif": "السبب",
-      "remarks": "ملاحظات",
-      "actions": "إجراءات"
-    },
-    "form": {
-      "selectMotif": "اختر السبب"
-    },
-    "messages": {
-      "deleteConfirm": "هل أنت متأكد من حذف هذا الغياب؟",
-      "loadError": "فشل في تحميل بيانات الغياب",
-      "loadMotifsError": "فشل في تحميل أسباب الغياب",
-      "deleteSuccess": "تم حذف الغياب بنجاح",
-      "deleteError": "فشل في حذف الغياب",
-      "saveSuccess": "تم إضافة الغياب بنجاح",
-      "updateSuccess": "تم تحديث الغياب بنجاح",
-      "saveError": "فشل في حفظ الغياب",
-      "fillRequired": "يرجى ملء جميع الحقول المطلوبة"
-    }
-  },
-  "weeklySchedule": {
-    "title": "الجدول الأسبوعي",
-    "addEntry": "إضافة حصة جديدة",
-    "editEntry": "تعديل الحصة",
-    "noEntries": "لا توجد حصص لهذا اليوم",
-    "fields": {
-      "dayOfWeek": "يوم الأسبوع",
-      "startTime": "وقت البداية",
-      "endTime": "وقت النهاية",
-      "subjectClass": "المادة/الفصل"
-    },
-    "messages": {
-      "deleteConfirm": "هل أنت متأكد من حذف هذه الحصة؟",
-      "loadError": "فشل في تحميل بيانات الجدول",
-      "deleteSuccess": "تم حذف الحصة بنجاح",
-      "deleteError": "فشل في حذف الحصة",
-      "saveSuccess": "تم حفظ الحصة بنجاح",
-      "updateSuccess": "تم تحديث الحصة بنجاح",
-      "saveError": "فشل في حفظ الحصة",
-      "fillRequired": "يرجى ملء جميع الحقول المطلوبة",
-      "entryAdded": "تمت إضافة حصة جديدة",
-      "entryUpdated": "تم تحديث الحصة"
-    }
-  },
-  "lessonPlans": {
-    "title": "خطط الدروس",
-    "addPlan": "إضافة خطة",
-    "editPlan": "تعديل الخطة",
-    "noPlans": "لا توجد خطط دروس. انقر على \"إضافة خطة\" لإنشاء أول خطة",
-    "fields": {
-      "lessonNumber": "رقم الدرس",
-      "objectives": "الأهداف",
-      "status": "الحالة",
-      "remarks": "ملاحظات",
-      "actions": "إجراءات",
-      "completionStatus": "تحديد كمكتمل"
-    },
-    "table": {
-      "lessonNumber": "درس رقم",
-      "objectives": "الأهداف",
-      "status": "الحالة",
-      "remarks": "ملاحظات",
-      "actions": "إجراءات",
-      "optional": "اختياري"
-    },
-    "status": {
-      "completed": "مكتمل",
-      "notCompleted": "غير مكتمل"
-    },
-    "messages": {
-      "deleteConfirm": "هل أنت متأكد من حذف هذه الخطة؟",
-      "loadError": "فشل في تحميل الخطط",
-      "deleteSuccess": "تم حذف الخطة بنجاح",
-      "deleteError": "فشل في حذف الخطة",
-      "saveSuccess": "تم إضافة الخطة بنجاح",
-      "updateSuccess": "تم تحديث الخطة بنجاح",
-      "saveError": "فشل في حفظ الخطة",
-      "fillRequired": "يرجى ملء جميع الحقول المطلوبة",
-      "statusUpdate": "تم تحديد الدرس {{number}} كـ {{status}}",
-      "statusUpdateError": "فشل في تحديث حالة الخطة"
     }
   },
   "teacherProfile": {

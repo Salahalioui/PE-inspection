@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '../../lib/supabase';
 
 interface Teacher {
@@ -11,10 +12,14 @@ interface Teacher {
 }
 
 export function TeacherList() {
+  const { t, i18n } = useTranslation();
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterText, setFilterText] = useState('');
   const navigate = useNavigate();
+
+  // RTL support
+  const isRTL = i18n.language === 'ar';
 
   useEffect(() => {
     fetchTeachers();
@@ -32,10 +37,14 @@ export function TeacherList() {
           appointment_date
         `);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching teachers:', error);
+        throw error;
+      }
       setTeachers(data || []);
     } catch (error) {
       console.error('Error fetching teachers:', error);
+      // Show error message or handle error state
     } finally {
       setLoading(false);
     }
@@ -48,13 +57,13 @@ export function TeacherList() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className={`space-y-6 ${isRTL ? 'rtl' : 'ltr'}`}>
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-gray-800">Teacher List</h2>
+        <h2 className="text-xl font-semibold text-gray-800">{t('inspectorTeacherList.title')}</h2>
         <div>
           <input
             type="text"
-            placeholder="Search teachers..."
+            placeholder={t('inspectorTeacherList.search')}
             value={filterText}
             onChange={(e) => setFilterText(e.target.value)}
             className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -63,17 +72,27 @@ export function TeacherList() {
       </div>
 
       {loading ? (
-        <div className="text-center">Loading...</div>
+        <div className="text-center">{t('inspectorTeacherList.loading')}</div>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Institution</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Level</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Appointment Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  {t('inspectorTeacherList.table.name')}
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  {t('inspectorTeacherList.table.institution')}
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  {t('inspectorTeacherList.table.level')}
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  {t('inspectorTeacherList.table.appointmentDate')}
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  {t('inspectorTeacherList.table.actions')}
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -83,14 +102,14 @@ export function TeacherList() {
                   <td className="px-6 py-4 whitespace-nowrap">{teacher.work_institution}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{teacher.level}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {new Date(teacher.appointment_date).toLocaleDateString()}
+                    {new Date(teacher.appointment_date).toLocaleDateString(i18n.language)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <button
                       onClick={() => navigate(`/inspector/teachers/${teacher.id}`)}
                       className="text-blue-600 hover:text-blue-800"
                     >
-                      View Details
+                      {t('inspectorTeacherList.actions.viewDetails')}
                     </button>
                   </td>
                 </tr>
@@ -100,7 +119,7 @@ export function TeacherList() {
           
           {filteredTeachers.length === 0 && (
             <div className="text-center py-4 text-gray-500">
-              No teachers found
+              {t('inspectorTeacherList.noTeachers')}
             </div>
           )}
         </div>

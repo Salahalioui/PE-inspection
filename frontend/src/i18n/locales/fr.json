@@ -48,6 +48,23 @@
       "createAccount": "Créer un compte"
     }
   },
+  "inspectorTeacherList": {
+    "title": "Liste des enseignants",
+    "search": "Rechercher des enseignants...",
+    "table": {
+      "name": "Nom",
+      "institution": "Établissement",
+      "level": "Niveau",
+      "appointmentDate": "Date de nomination",
+      "actions": "Actions"
+    },
+    "actions": {
+      "viewDetails": "Voir les détails"
+    },
+    "noTeachers": "Aucun enseignant trouvé",
+    "loading": "Chargement...",
+    "error": "Erreur lors du chargement des enseignants"
+  },
   "progressReports": {
     "title": "Rapports de progression",
     "cards": {
@@ -65,113 +82,18 @@
       "title": "Progression mensuelle",
       "noData": "Aucune donnée mensuelle disponible pour le moment.",
       "lessons": "{{completed}}/{{total}} leçons",
-      "absences": {
-        "singular": "{{count}} absence",
-        "plural": "{{count}} absences"
-      }
+      "absencesCount": "{{count}} absence",
+      "absencesCountPlural": "{{count}} absences"
     },
     "summary": {
       "title": "Résumé",
       "completion": "Vous avez terminé {{completed}} sur {{total}} leçons (taux de complétion {{percentage}}%).",
-      "absences": "Vous avez enregistré {{count}} absences au total."
+      "absencesCount": "Vous avez enregistré {{count}} absence.",
+      "absencesCountPlural": "Vous avez enregistré {{count}} absences."
     },
     "messages": {
       "loadLessonError": "Échec du chargement des données des leçons",
       "loadAbsenceError": "Échec du chargement des données d'absence"
-    }
-  },
-  "absenceTracker": {
-    "title": "Registre des absences",
-    "addAbsence": "Ajouter une absence",
-    "editAbsence": "Modifier l'absence",
-    "noAbsences": "Aucune absence enregistrée. Cliquez sur \"Ajouter une absence\" pour créer votre premier enregistrement.",
-    "fields": {
-      "date": "Date d'absence",
-      "motif": "Motif d'absence",
-      "remarks": "Remarques",
-      "actions": "Actions"
-    },
-    "table": {
-      "date": "Date",
-      "motif": "Motif",
-      "remarks": "Remarques",
-      "actions": "Actions"
-    },
-    "form": {
-      "selectMotif": "Sélectionner un motif"
-    },
-    "messages": {
-      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet enregistrement d'absence?",
-      "loadError": "Échec du chargement des données d'absence",
-      "loadMotifsError": "Échec du chargement des motifs d'absence",
-      "deleteSuccess": "Absence supprimée avec succès",
-      "deleteError": "Échec de la suppression de l'absence",
-      "saveSuccess": "Absence ajoutée avec succès",
-      "updateSuccess": "Absence mise à jour avec succès",
-      "saveError": "Échec de l'enregistrement de l'absence",
-      "fillRequired": "Veuillez remplir tous les champs obligatoires"
-    }
-  },
-  "weeklySchedule": {
-    "title": "Emploi du temps hebdomadaire",
-    "addEntry": "Ajouter une entrée",
-    "editEntry": "Modifier l'entrée",
-    "noEntries": "Pas d'entrées pour ce jour",
-    "fields": {
-      "dayOfWeek": "Jour de la semaine",
-      "startTime": "Heure de début",
-      "endTime": "Heure de fin",
-      "subjectClass": "Matière/Classe"
-    },
-    "messages": {
-      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette entrée?",
-      "loadError": "Échec du chargement des données",
-      "deleteSuccess": "Entrée supprimée avec succès",
-      "deleteError": "Échec de la suppression de l'entrée",
-      "saveSuccess": "Entrée enregistrée avec succès",
-      "updateSuccess": "Entrée mise à jour avec succès",
-      "saveError": "Échec de l'enregistrement de l'entrée",
-      "fillRequired": "Veuillez remplir tous les champs obligatoires",
-      "entryAdded": "Nouvelle entrée ajoutée",
-      "entryUpdated": "Entrée mise à jour"
-    }
-  },
-  "lessonPlans": {
-    "title": "Plans de cours",
-    "addPlan": "Ajouter un plan",
-    "editPlan": "Modifier le plan",
-    "noPlans": "Aucun plan de cours. Cliquez sur \"Ajouter un plan\" pour créer votre premier.",
-    "fields": {
-      "lessonNumber": "Numéro de leçon",
-      "objectives": "Objectifs",
-      "status": "État",
-      "remarks": "Remarques",
-      "actions": "Actions",
-      "completionStatus": "Marquer comme terminé"
-    },
-    "table": {
-      "lessonNumber": "Leçon n°",
-      "objectives": "Objectifs",
-      "status": "État",
-      "remarks": "Remarques",
-      "actions": "Actions",
-      "optional": "Optionnel"
-    },
-    "status": {
-      "completed": "Terminé",
-      "notCompleted": "Non terminé"
-    },
-    "messages": {
-      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce plan?",
-      "loadError": "Échec du chargement des plans",
-      "deleteSuccess": "Plan supprimé avec succès",
-      "deleteError": "Échec de la suppression du plan",
-      "saveSuccess": "Plan ajouté avec succès",
-      "updateSuccess": "Plan mis à jour avec succès",
-      "saveError": "Échec de l'enregistrement du plan",
-      "fillRequired": "Veuillez remplir tous les champs obligatoires",
-      "statusUpdate": "Leçon {{number}} marquée comme {{status}}",
-      "statusUpdateError": "Échec de la mise à jour du statut du plan"
     }
   },
   "teacherProfile": {
