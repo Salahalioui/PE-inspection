@@ -65,6 +65,59 @@
     "loading": "Loading...",
     "error": "Error fetching teachers"
   },
+  "inspectorTeacherDetails": {
+    "loading": "Loading...",
+    "notFound": "Teacher not found",
+    "tabs": {
+      "profile": "Profile",
+      "lessons": "Lesson Plans",
+      "absences": "Absences"
+    },
+    "actions": {
+      "viewSchedule": "View Schedule"
+    },
+    "profile": {
+      "fullName": "Full Name",
+      "dateOfBirth": "Date of Birth",
+      "jobTitle": "Job Title",
+      "level": "Level",
+      "institution": "Institution",
+      "position": "Position",
+      "grade": "Grade",
+      "appointmentDate": "Appointment Date"
+    },
+    "lessonPlans": {
+      "table": {
+        "number": "Lesson #",
+        "objectives": "Objectives",
+        "status": "Status",
+        "remarks": "Remarks",
+        "date": "Date"
+      },
+      "status": {
+        "completed": "Completed",
+        "pending": "Pending"
+      },
+      "noPlans": "No lesson plans found"
+    },
+    "absences": {
+      "table": {
+        "date": "Date",
+        "motifAr": "Motif (AR)",
+        "motifFr": "Motif (FR)",
+        "remarks": "Remarks"
+      },
+      "noAbsences": "No absences found"
+    }
+  },
+  "inspectorTeacherSchedule": {
+    "loading": "Loading schedule...",
+    "error": "Failed to fetch schedule",
+    "notFound": "Teacher not found",
+    "title": "{{name}}'s Schedule",
+    "institution": "Institution: {{institution}}",
+    "noSchedule": "No schedule entries found."
+  },
   "progressReports": {
     "title": "Progress Reports",
     "cards": {

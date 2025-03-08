@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '../../lib/supabase';
 
 interface ScheduleEntry {
@@ -18,15 +19,19 @@ interface TeacherWithProfile {
 }
 
 export function TeacherSchedule() {
+  const { t, i18n } = useTranslation();
   const { teacherId } = useParams();
   const [schedule, setSchedule] = useState<ScheduleEntry[]>([]);
   const [teacher, setTeacher] = useState<TeacherWithProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // RTL support
+  const isRTL = i18n.language === 'ar';
+
   useEffect(() => {
     fetchTeacherSchedule();
-  }, [teacherId]);
+  }, [teacherId, i18n.language]); // Added i18n.language dependency to refetch on language change
 
   async function fetchTeacherSchedule() {
     try {
@@ -40,7 +45,7 @@ export function TeacherSchedule() {
         .single();
 
       if (teacherError) throw teacherError;
-      if (!teacherData) throw new Error('Teacher not found');
+      if (!teacherData) throw new Error(t('inspectorTeacherSchedule.notFound'));
       
       setTeacher(teacherData);
 
@@ -56,33 +61,43 @@ export function TeacherSchedule() {
       setSchedule(scheduleData || []);
 
     } catch (err: any) {
-      setError(err.message || 'Failed to fetch schedule');
+      setError(err.message || t('inspectorTeacherSchedule.error'));
     } finally {
       setLoading(false);
     }
   }
 
-  if (loading) return <div className="text-center py-8">Loading schedule...</div>;
+  if (loading) return <div className="text-center py-8">{t('inspectorTeacherSchedule.loading')}</div>;
   if (error) return <div className="text-red-600 p-4">{error}</div>;
-  if (!teacher) return <div className="text-center py-8">Teacher not found</div>;
+  if (!teacher) return <div className="text-center py-8">{t('inspectorTeacherSchedule.notFound')}</div>;
 
   return (
-    <div className="p-6">
+    <div className={`p-6 ${isRTL ? 'rtl' : 'ltr'}`}>
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">{teacher.full_name}'s Schedule</h2>
-        <p className="text-gray-600">Institution: {teacher.work_institution}</p>
+        <h2 className="text-2xl font-bold mb-2">
+          {t('inspectorTeacherSchedule.title', { name: teacher.full_name })}
+        </h2>
+        <p className="text-gray-600">
+          {t('inspectorTeacherSchedule.institution', { institution: teacher.work_institution })}
+        </p>
       </div>
 
       {schedule.length === 0 ? (
-        <p className="text-gray-600">No schedule entries found.</p>
+        <p className="text-gray-600">{t('inspectorTeacherSchedule.noSchedule')}</p>
       ) : (
         <div className="grid gap-4">
-          {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => (
-            <div key={day} className="bg-white rounded-lg shadow p-4">
-              <h3 className="font-semibold text-lg mb-3 text-gray-800">{day}</h3>
+          {[
+            { key: 'monday', label: t('days.monday') },
+            { key: 'tuesday', label: t('days.tuesday') },
+            { key: 'wednesday', label: t('days.wednesday') },
+            { key: 'thursday', label: t('days.thursday') },
+            { key: 'friday', label: t('days.friday') }
+          ].map((day) => (
+            <div key={day.key} className="bg-white rounded-lg shadow p-4">
+              <h3 className="font-semibold text-lg mb-3 text-gray-800">{day.label}</h3>
               <div className="space-y-2">
                 {schedule
-                  .filter((entry) => entry.day_of_week === day)
+                  .filter((entry) => entry.day_of_week.toLowerCase() === day.key)
                   .map((entry) => (
                     <div
                       key={entry.id}
@@ -91,7 +106,7 @@ export function TeacherSchedule() {
                       <div className="text-gray-800">
                         <span className="font-medium">{entry.subject_class}</span>
                       </div>
-                      <div className="text-gray-600">
+                      <div className={`text-gray-600 ${isRTL ? 'mr-4' : 'ml-4'}`}>
                         {entry.start_time.slice(0, 5)} - {entry.end_time.slice(0, 5)}
                       </div>
                     </div>

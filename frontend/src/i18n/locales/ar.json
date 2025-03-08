@@ -65,6 +65,59 @@
     "loading": "جاري التحميل...",
     "error": "خطأ في تحميل بيانات المعلمين"
   },
+  "inspectorTeacherDetails": {
+    "loading": "جاري التحميل...",
+    "notFound": "لم يتم العثور على المعلم",
+    "tabs": {
+      "profile": "الملف الشخصي",
+      "lessons": "خطط الدروس",
+      "absences": "الغيابات"
+    },
+    "actions": {
+      "viewSchedule": "عرض الجدول الدراسي"
+    },
+    "profile": {
+      "fullName": "الاسم الكامل",
+      "dateOfBirth": "تاريخ الميلاد",
+      "jobTitle": "المسمى الوظيفي",
+      "level": "المستوى",
+      "institution": "المؤسسة",
+      "position": "المنصب",
+      "grade": "الدرجة",
+      "appointmentDate": "تاريخ التعيين"
+    },
+    "lessonPlans": {
+      "table": {
+        "number": "درس رقم",
+        "objectives": "الأهداف",
+        "status": "الحالة",
+        "remarks": "الملاحظات",
+        "date": "التاريخ"
+      },
+      "status": {
+        "completed": "مكتمل",
+        "pending": "قيد الانتظار"
+      },
+      "noPlans": "لم يتم العثور على خطط دروس"
+    },
+    "absences": {
+      "table": {
+        "date": "التاريخ",
+        "motifAr": "السبب (عربي)",
+        "motifFr": "السبب (فرنسي)",
+        "remarks": "الملاحظات"
+      },
+      "noAbsences": "لم يتم العثور على غيابات"
+    }
+  },
+  "inspectorTeacherSchedule": {
+    "loading": "جاري تحميل الجدول الدراسي...",
+    "error": "فشل في تحميل الجدول الدراسي",
+    "notFound": "لم يتم العثور على المعلم",
+    "title": "الجدول الدراسي لـ {{name}}",
+    "institution": "المؤسسة: {{institution}}",
+    "noSchedule": "لم يتم العثور على جدول دراسي."
+  },
   "progressReports": {
     "title": "تقارير التقدم",
     "cards": {

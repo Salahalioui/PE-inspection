@@ -65,6 +65,59 @@
     "loading": "Chargement...",
     "error": "Erreur lors du chargement des enseignants"
   },
+  "inspectorTeacherDetails": {
+    "loading": "Chargement...",
+    "notFound": "Enseignant non trouvé",
+    "tabs": {
+      "profile": "Profil",
+      "lessons": "Plans de cours",
+      "absences": "Absences"
+    },
+    "actions": {
+      "viewSchedule": "Voir l'emploi du temps"
+    },
+    "profile": {
+      "fullName": "Nom complet",
+      "dateOfBirth": "Date de naissance",
+      "jobTitle": "Fonction",
+      "level": "Niveau",
+      "institution": "Établissement",
+      "position": "Poste",
+      "grade": "Grade",
+      "appointmentDate": "Date de nomination"
+    },
+    "lessonPlans": {
+      "table": {
+        "number": "Leçon n°",
+        "objectives": "Objectifs",
+        "status": "État",
+        "remarks": "Remarques",
+        "date": "Date"
+      },
+      "status": {
+        "completed": "Terminé",
+        "pending": "En attente"
+      },
+      "noPlans": "Aucun plan de cours trouvé"
+    },
+    "absences": {
+      "table": {
+        "date": "Date",
+        "motifAr": "Motif (AR)",
+        "motifFr": "Motif (FR)",
+        "remarks": "Remarques"
+      },
+      "noAbsences": "Aucune absence trouvée"
+    }
+  },
+  "inspectorTeacherSchedule": {
+    "loading": "Chargement de l'emploi du temps...",
+    "error": "Échec du chargement de l'emploi du temps",
+    "notFound": "Enseignant non trouvé",
+    "title": "Emploi du temps de {{name}}",
+    "institution": "Établissement : {{institution}}",
+    "noSchedule": "Aucun emploi du temps trouvé."
+  },
   "progressReports": {
     "title": "Rapports de progression",
     "cards": {
