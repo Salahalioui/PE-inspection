@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
 import type { LessonPlan as LessonPlanType } from '../../lib/supabase';
@@ -6,6 +7,7 @@ import type { LessonPlan as LessonPlanType } from '../../lib/supabase';
 type LessonPlanWithId = LessonPlanType & { isNew?: boolean };
 
 export function LessonPlans() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [lessonPlans, setLessonPlans] = useState<LessonPlanWithId[]>([]);
@@ -32,7 +34,7 @@ export function LessonPlans() {
       setLessonPlans(data || []);
     } catch (error) {
       console.error('Error loading lesson plans:', error);
-      setMessage({ text: 'Failed to load lesson plans', type: 'error' });
+      setMessage({ text: t('lessonPlans.messages.loadError'), type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -65,7 +67,7 @@ export function LessonPlans() {
   };
 
   const handleDeletePlan = async (planId: string) => {
-    if (window.confirm('Are you sure you want to delete this lesson plan?')) {
+    if (window.confirm(t('lessonPlans.messages.deleteConfirm'))) {
       try {
         const { error } = await supabase
           .from('lesson_plans')
@@ -75,10 +77,10 @@ export function LessonPlans() {
         if (error) throw error;
 
         setLessonPlans(lessonPlans.filter(plan => plan.id !== planId));
-        setMessage({ text: 'Lesson plan deleted successfully', type: 'success' });
+        setMessage({ text: t('lessonPlans.messages.deleteSuccess'), type: 'success' });
       } catch (error) {
         console.error('Error deleting lesson plan:', error);
-        setMessage({ text: 'Failed to delete lesson plan', type: 'error' });
+        setMessage({ text: t('lessonPlans.messages.deleteError'), type: 'error' });
       }
     }
   };
@@ -106,7 +108,10 @@ export function LessonPlans() {
       );
       
       setMessage({ 
-        text: `Lesson ${plan.lesson_number} marked as ${updatedStatus ? 'completed' : 'incomplete'}`, 
+        text: t('lessonPlans.messages.statusUpdate', {
+          number: plan.lesson_number,
+          status: updatedStatus ? t('lessonPlans.status.completed') : t('lessonPlans.status.notCompleted')
+        }), 
         type: 'success' 
       });
       
@@ -115,7 +120,7 @@ export function LessonPlans() {
       
     } catch (error) {
       console.error('Error updating lesson plan status:', error);
-      setMessage({ text: 'Failed to update lesson plan status', type: 'error' });
+      setMessage({ text: t('lessonPlans.messages.statusUpdateError'), type: 'error' });
     }
   };
 
@@ -126,7 +131,7 @@ export function LessonPlans() {
       const { lesson_number, objectives, completion_status, remarks } = editingPlan;
 
       if (!lesson_number || !objectives) {
-        setMessage({ text: 'Please fill in all required fields', type: 'error' });
+        setMessage({ text: t('lessonPlans.messages.fillRequired'), type: 'error' });
         return;
       }
 
@@ -147,7 +152,7 @@ export function LessonPlans() {
 
         if (data && data.length > 0) {
           setLessonPlans([...lessonPlans, data[0]]);
-          setMessage({ text: 'Lesson plan added successfully', type: 'success' });
+          setMessage({ text: t('lessonPlans.messages.saveSuccess'), type: 'success' });
         }
       } else {
         // Update existing lesson plan
@@ -178,14 +183,14 @@ export function LessonPlans() {
               : plan
           )
         );
-        setMessage({ text: 'Lesson plan updated successfully', type: 'success' });
+        setMessage({ text: t('lessonPlans.messages.updateSuccess'), type: 'success' });
       }
 
       setIsModalOpen(false);
       setEditingPlan(null);
     } catch (error) {
       console.error('Error saving lesson plan:', error);
-      setMessage({ text: 'Failed to save lesson plan', type: 'error' });
+      setMessage({ text: t('lessonPlans.messages.saveError'), type: 'error' });
     }
   };
 
@@ -196,12 +201,12 @@ export function LessonPlans() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold">Lesson Plans</h2>
+        <h2 className="text-xl font-semibold">{t('lessonPlans.title')}</h2>
         <button
           onClick={handleAddPlan}
           className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Add Lesson Plan
+          {t('lessonPlans.addPlan')}
         </button>
       </div>
 
@@ -217,19 +222,19 @@ export function LessonPlans() {
             <thead className="bg-gray-50">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Lesson #
+                  {t('lessonPlans.table.lessonNumber')}
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Objectives
+                  {t('lessonPlans.table.objectives')}
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                  {t('lessonPlans.table.status')}
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Remarks
+                  {t('lessonPlans.table.remarks')}
                 </th>
                 <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                  {t('lessonPlans.table.actions')}
                 </th>
               </tr>
             </thead>
@@ -247,7 +252,7 @@ export function LessonPlans() {
                       onClick={() => handleToggleCompletion(plan)}
                       className={`px-3 py-1 rounded-full text-xs font-medium ${plan.completion_status ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}
                     >
-                      {plan.completion_status ? 'Completed' : 'Not Completed'}
+                      {plan.completion_status ? t('lessonPlans.status.completed') : t('lessonPlans.status.notCompleted')}
                     </button>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500">
@@ -258,13 +263,13 @@ export function LessonPlans() {
                       onClick={() => handleEditPlan(plan)}
                       className="text-indigo-600 hover:text-indigo-900 mr-4"
                     >
-                      Edit
+                      {t('common.edit')}
                     </button>
                     <button
                       onClick={() => handleDeletePlan(plan.id)}
                       className="text-red-600 hover:text-red-900"
                     >
-                      Delete
+                      {t('common.delete')}
                     </button>
                   </td>
                 </tr>
@@ -274,7 +279,7 @@ export function LessonPlans() {
         </div>
       ) : (
         <div className="bg-white shadow rounded-lg p-6 text-center text-gray-500">
-          No lesson plans yet. Click "Add Lesson Plan" to create your first one.
+          {t('lessonPlans.noPlans')}
         </div>
       )}
 
@@ -283,12 +288,12 @@ export function LessonPlans() {
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
             <h3 className="text-lg font-medium text-gray-900 mb-4">
-              {editingPlan?.isNew ? 'Add Lesson Plan' : 'Edit Lesson Plan'}
+              {editingPlan?.isNew ? t('lessonPlans.addPlan') : t('lessonPlans.editPlan')}
             </h3>
             <div className="space-y-4">
               <div>
                 <label htmlFor="lessonNumber" className="block text-sm font-medium text-gray-700 mb-1">
-                  Lesson Number
+                  {t('lessonPlans.fields.lessonNumber')}
                 </label>
                 <input
                   id="lessonNumber"
@@ -301,7 +306,7 @@ export function LessonPlans() {
               </div>
               <div>
                 <label htmlFor="objectives" className="block text-sm font-medium text-gray-700 mb-1">
-                  Objectives
+                  {t('lessonPlans.fields.objectives')}
                 </label>
                 <textarea
                   id="objectives"
@@ -321,12 +326,12 @@ export function LessonPlans() {
                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                 />
                 <label htmlFor="completionStatus" className="ml-2 block text-sm text-gray-700">
-                  Mark as completed
+                  {t('lessonPlans.fields.completionStatus')}
                 </label>
               </div>
               <div>
                 <label htmlFor="remarks" className="block text-sm font-medium text-gray-700 mb-1">
-                  Remarks (Optional)
+                  {t('lessonPlans.fields.remarks')} ({t('common.optional')})
                 </label>
                 <textarea
                   id="remarks"
@@ -345,13 +350,13 @@ export function LessonPlans() {
                 }}
                 className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Cancel
+                {t('common.cancel')}
               </button>
               <button
                 onClick={handleSavePlan}
                 className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Save
+                {t('common.save')}
               </button>
             </div>
           </div>

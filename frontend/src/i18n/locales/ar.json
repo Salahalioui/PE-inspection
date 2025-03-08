@@ -72,6 +72,44 @@
       "entryUpdated": "تم تحديث الحصة"
     }
   },
+  "lessonPlans": {
+    "title": "خطط الدروس",
+    "addPlan": "إضافة خطة",
+    "editPlan": "تعديل الخطة",
+    "noPlans": "لا توجد خطط دروس. انقر على \"إضافة خطة\" لإنشاء أول خطة",
+    "fields": {
+      "lessonNumber": "رقم الدرس",
+      "objectives": "الأهداف",
+      "status": "الحالة",
+      "remarks": "ملاحظات",
+      "actions": "إجراءات",
+      "completionStatus": "تحديد كمكتمل"
+    },
+    "table": {
+      "lessonNumber": "درس رقم",
+      "objectives": "الأهداف",
+      "status": "الحالة",
+      "remarks": "ملاحظات",
+      "actions": "إجراءات",
+      "optional": "اختياري"
+    },
+    "status": {
+      "completed": "مكتمل",
+      "notCompleted": "غير مكتمل"
+    },
+    "messages": {
+      "deleteConfirm": "هل أنت متأكد من حذف هذه الخطة؟",
+      "loadError": "فشل في تحميل الخطط",
+      "deleteSuccess": "تم حذف الخطة بنجاح",
+      "deleteError": "فشل في حذف الخطة",
+      "saveSuccess": "تم إضافة الخطة بنجاح",
+      "updateSuccess": "تم تحديث الخطة بنجاح",
+      "saveError": "فشل في حفظ الخطة",
+      "fillRequired": "يرجى ملء جميع الحقول المطلوبة",
+      "statusUpdate": "تم تحديد الدرس {{number}} كـ {{status}}",
+      "statusUpdateError": "فشل في تحديث حالة الخطة"
+    }
+  },
   "teacherProfile": {
     "title": "الملف الشخصي للمعلم",
     "personal": {
@@ -114,35 +152,6 @@
       "updateProfile": "تحديث الملف الشخصي",
       "createProfile": "إنشاء الملف الشخصي",
       "submit": "إرسال"
-    }
-  },
-  "lessonPlans": {
-    "title": "خطط الدروس",
-    "addPlan": "إضافة خطة",
-    "editPlan": "تعديل الخطة",
-    "noPlans": "لا توجد خطط دروس. انقر على \"إضافة خطة\" لإنشاء أول خطة",
-    "fields": {
-      "lessonNumber": "رقم الدرس",
-      "objectives": "الأهداف",
-      "status": "الحالة",
-      "remarks": "ملاحظات",
-      "actions": "إجراءات",
-      "completionStatus": "تحديد كمكتمل"
-    },
-    "status": {
-      "completed": "مكتمل",
-      "notCompleted": "غير مكتمل"
-    },
-    "messages": {
-      "deleteConfirm": "هل أنت متأكد من حذف هذه الخطة؟",
-      "loadError": "فشل في تحميل الخطط",
-      "deleteSuccess": "تم حذف الخطة بنجاح",
-      "deleteError": "فشل في حذف الخطة",
-      "saveSuccess": "تم حفظ الخطة بنجاح",
-      "updateSuccess": "تم تحديث الخطة بنجاح",
-      "saveError": "فشل في حفظ الخطة",
-      "fillRequired": "يرجى ملء جميع الحقول المطلوبة",
-      "statusUpdate": "تم تحديد الدرس {{number}} كـ {{status}}"
     }
   },
   "landing": {

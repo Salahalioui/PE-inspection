@@ -72,6 +72,44 @@
       "entryUpdated": "Schedule entry updated"
     }
   },
+  "lessonPlans": {
+    "title": "Lesson Plans",
+    "addPlan": "Add Lesson Plan",
+    "editPlan": "Edit Lesson Plan",
+    "noPlans": "No lesson plans yet. Click \"Add Lesson Plan\" to create your first one.",
+    "fields": {
+      "lessonNumber": "Lesson Number",
+      "objectives": "Objectives",
+      "status": "Status",
+      "remarks": "Remarks",
+      "actions": "Actions",
+      "completionStatus": "Mark as completed"
+    },
+    "table": {
+      "lessonNumber": "Lesson #",
+      "objectives": "Objectives",
+      "status": "Status",
+      "remarks": "Remarks",
+      "actions": "Actions",
+      "optional": "Optional"
+    },
+    "status": {
+      "completed": "Completed",
+      "notCompleted": "Not Completed"
+    },
+    "messages": {
+      "deleteConfirm": "Are you sure you want to delete this lesson plan?",
+      "loadError": "Failed to load lesson plans",
+      "deleteSuccess": "Lesson plan deleted successfully",
+      "deleteError": "Failed to delete lesson plan",
+      "saveSuccess": "Lesson plan added successfully",
+      "updateSuccess": "Lesson plan updated successfully",
+      "saveError": "Failed to save lesson plan",
+      "fillRequired": "Please fill in all required fields",
+      "statusUpdate": "Lesson {{number}} marked as {{status}}",
+      "statusUpdateError": "Failed to update lesson plan status"
+    }
+  },
   "teacherProfile": {
     "title": "Teacher Profile",
     "personal": {
@@ -114,35 +152,6 @@
       "updateProfile": "Update Profile",
       "createProfile": "Create Profile",
       "submit": "Submit"
-    }
-  },
-  "lessonPlans": {
-    "title": "Lesson Plans",
-    "addPlan": "Add Lesson Plan",
-    "editPlan": "Edit Lesson Plan",
-    "noPlans": "No lesson plans yet. Click \"Add Lesson Plan\" to create your first one.",
-    "fields": {
-      "lessonNumber": "Lesson Number",
-      "objectives": "Objectives",
-      "status": "Status",
-      "remarks": "Remarks",
-      "actions": "Actions",
-      "completionStatus": "Mark as completed"
-    },
-    "status": {
-      "completed": "Completed",
-      "notCompleted": "Not Completed"
-    },
-    "messages": {
-      "deleteConfirm": "Are you sure you want to delete this lesson plan?",
-      "loadError": "Failed to load lesson plans",
-      "deleteSuccess": "Lesson plan deleted successfully",
-      "deleteError": "Failed to delete lesson plan",
-      "saveSuccess": "Lesson plan saved successfully",
-      "updateSuccess": "Lesson plan updated successfully",
-      "saveError": "Failed to save lesson plan",
-      "fillRequired": "Please fill in all required fields",
-      "statusUpdate": "Lesson {{number}} marked as {{status}}"
     }
   },
   "landing": {

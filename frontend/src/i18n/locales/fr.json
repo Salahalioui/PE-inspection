@@ -72,6 +72,44 @@
       "entryUpdated": "Entrée mise à jour"
     }
   },
+  "lessonPlans": {
+    "title": "Plans de cours",
+    "addPlan": "Ajouter un plan",
+    "editPlan": "Modifier le plan",
+    "noPlans": "Aucun plan de cours. Cliquez sur \"Ajouter un plan\" pour créer votre premier.",
+    "fields": {
+      "lessonNumber": "Numéro de leçon",
+      "objectives": "Objectifs",
+      "status": "État",
+      "remarks": "Remarques",
+      "actions": "Actions",
+      "completionStatus": "Marquer comme terminé"
+    },
+    "table": {
+      "lessonNumber": "Leçon n°",
+      "objectives": "Objectifs",
+      "status": "État",
+      "remarks": "Remarques",
+      "actions": "Actions",
+      "optional": "Optionnel"
+    },
+    "status": {
+      "completed": "Terminé",
+      "notCompleted": "Non terminé"
+    },
+    "messages": {
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce plan?",
+      "loadError": "Échec du chargement des plans",
+      "deleteSuccess": "Plan supprimé avec succès",
+      "deleteError": "Échec de la suppression du plan",
+      "saveSuccess": "Plan ajouté avec succès",
+      "updateSuccess": "Plan mis à jour avec succès",
+      "saveError": "Échec de l'enregistrement du plan",
+      "fillRequired": "Veuillez remplir tous les champs obligatoires",
+      "statusUpdate": "Leçon {{number}} marquée comme {{status}}",
+      "statusUpdateError": "Échec de la mise à jour du statut du plan"
+    }
+  },
   "teacherProfile": {
     "title": "Profil de l'enseignant",
     "personal": {
@@ -114,35 +152,6 @@
       "updateProfile": "Mettre à jour le profil",
       "createProfile": "Créer le profil",
       "submit": "Soumettre"
-    }
-  },
-  "lessonPlans": {
-    "title": "Plans de cours",
-    "addPlan": "Ajouter un plan",
-    "editPlan": "Modifier le plan",
-    "noPlans": "Aucun plan de cours. Cliquez sur \"Ajouter un plan\" pour créer votre premier.",
-    "fields": {
-      "lessonNumber": "Numéro de leçon",
-      "objectives": "Objectifs",
-      "status": "État",
-      "remarks": "Remarques",
-      "actions": "Actions",
-      "completionStatus": "Marquer comme terminé"
-    },
-    "status": {
-      "completed": "Terminé",
-      "notCompleted": "Non terminé"
-    },
-    "messages": {
-      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce plan?",
-      "loadError": "Échec du chargement des plans",
-      "deleteSuccess": "Plan supprimé avec succès",
-      "deleteError": "Échec de la suppression du plan",
-      "saveSuccess": "Plan enregistré avec succès",
-      "updateSuccess": "Plan mis à jour avec succès",
-      "saveError": "Échec de l'enregistrement du plan",
-      "fillRequired": "Veuillez remplir tous les champs obligatoires",
-      "statusUpdate": "Leçon {{number}} marquée comme {{status}}"
     }
   },
   "landing": {
