@@ -2,10 +2,20 @@
   "common": {
     "welcome": "مرحبا",
     "login": "تسجيل الدخول",
-    "logout": "تسجيل الخروج", 
+    "logout": "تسجيل الخروج",
     "profile": "الملف الشخصي",
     "loading": "جاري التحميل...",
-    "processing": "جاري المعالجة..."
+    "processing": "جاري المعالجة...",
+    "saving": "جاري الحفظ...",
+    "select": "اختر",
+    "update": "تحديث",
+    "create": "إنشاء",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "required": "الحقول المطلوبة",
+    "optional": "اختياري"
   },
   "auth": {
     "welcomeBack": "مرحباً بعودتك!",
@@ -20,13 +30,71 @@
       "inspector": "مفتش"
     },
     "messages": {
-      "accountCreated": "تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول.",
-      "completeProfile": "تم إنشاء الحساب! يرجى إكمال ملفك الشخصي بعد تسجيل الدخول.",
+      "accountCreated": "تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول",
+      "completeProfile": "تم إنشاء الحساب! يرجى إكمال ملفك الشخصي بعد تسجيل الدخول",
       "error": "حدث خطأ"
     },
     "buttons": {
       "signIn": "تسجيل الدخول",
       "createAccount": "إنشاء حساب"
+    }
+  },
+  "dashboard": {
+    "teacher": "لوحة تحكم المعلم",
+    "inspector": "لوحة تحكم المفتش",
+    "user": {
+      "role": "الدور"
+    },
+    "navigation": {
+      "profile": "الملف الشخصي",
+      "schedule": "الجدول",
+      "lessons": "الدروس",
+      "absences": "الغيابات",
+      "progress": "التقدم"
+    }
+  },
+  "teacherProfile": {
+    "title": "الملف الشخصي للمعلم",
+    "personal": {
+      "title": "المعلومات الشخصية",
+      "fullName": "الاسم الكامل",
+      "dateOfBirth": "تاريخ الميلاد",
+      "firstName": "الاسم الأول",
+      "lastName": "اللقب"
+    },
+    "professional": {
+      "title": "المعلومات المهنية",
+      "jobTitle": "الوظيفة",
+      "level": "المستوى",
+      "firstName": "الاسم الأول",
+      "lastName": "اللقب",
+      "workInstitution": "مؤسسة العمل",
+      "position": "المنصب",
+      "grade": "الدرجة",
+      "appointmentDate": "تاريخ التعيين",
+      "confirmationDate": "تاريخ الترسيم",
+      "maritalStatus": {
+        "label": "الحالة الاجتماعية",
+        "select": "اختر الحالة",
+        "single": "أعزب/عزباء",
+        "married": "متزوج/ة",
+        "divorced": "مطلق/ة",
+        "widowed": "أرمل/ة"
+      },
+      "certificateObtained": "الشهادة المتحصل عليها"
+    },
+    "messages": {
+      "loadError": "فشل في تحميل بيانات الملف الشخصي",
+      "updateSuccess": "تم تحديث الملف الشخصي بنجاح",
+      "createSuccess": "تم إنشاء الملف الشخصي بنجاح",
+      "updateError": "فشل في تحديث الملف الشخصي",
+      "createError": "فشل في إنشاء الملف الشخصي",
+      "fillRequired": "يرجى ملء جميع الحقول المطلوبة"
+    },
+    "buttons": {
+      "updateProfile": "تحديث الملف الشخصي",
+      "createProfile": "إنشاء الملف الشخصي",
+      "submit": "إرسال"
     }
   },
   "landing": {
@@ -59,6 +127,57 @@
         "secure": "إدارة آمنة للبيانات",
         "responsive": "تصميم متجاوب لجميع الأجهزة"
       }
+    }
+  },
+  "weeklySchedule": {
+    "title": "الجدول الأسبوعي",
+    "addEntry": "إضافة جدول جديد",
+    "editEntry": "تعديل الجدول",
+    "noEntries": "لا توجد جداول لهذا اليوم",
+    "fields": {
+      "dayOfWeek": "يوم الأسبوع",
+      "startTime": "وقت البداية",
+      "endTime": "وقت النهاية",
+      "subjectClass": "المادة/الفصل"
+    },
+    "messages": {
+      "deleteConfirm": "هل أنت متأكد من حذف هذا الجدول؟",
+      "loadError": "فشل في تحميل بيانات الجدول",
+      "deleteSuccess": "تم حذف الجدول بنجاح",
+      "deleteError": "فشل في حذف الجدول",
+      "saveSuccess": "تم حفظ الجدول بنجاح",
+      "updateSuccess": "تم تحديث الجدول بنجاح",
+      "saveError": "فشل في حفظ الجدول",
+      "fillRequired": "يرجى ملء جميع الحقول المطلوبة"
+    }
+  },
+  "lessonPlans": {
+    "title": "خطط الدروس",
+    "addPlan": "إضافة خطة",
+    "editPlan": "تعديل الخطة",
+    "noPlans": "لا توجد خطط دروس. انقر على \"إضافة خطة\" لإنشاء أول خطة",
+    "fields": {
+      "lessonNumber": "رقم الدرس",
+      "objectives": "الأهداف",
+      "status": "الحالة",
+      "remarks": "ملاحظات",
+      "actions": "إجراءات",
+      "completionStatus": "تحديد كمكتمل"
+    },
+    "status": {
+      "completed": "مكتمل",
+      "notCompleted": "غير مكتمل"
+    },
+    "messages": {
+      "deleteConfirm": "هل أنت متأكد من حذف هذه الخطة؟",
+      "loadError": "فشل في تحميل الخطط",
+      "deleteSuccess": "تم حذف الخطة بنجاح",
+      "deleteError": "فشل في حذف الخطة",
+      "saveSuccess": "تم حفظ الخطة بنجاح",
+      "updateSuccess": "تم تحديث الخطة بنجاح",
+      "saveError": "فشل في حفظ الخطة",
+      "fillRequired": "يرجى ملء جميع الحقول المطلوبة",
+      "statusUpdate": "تم تحديد الدرس {{number}} كـ {{status}}"
     }
   },
   "inspector": {

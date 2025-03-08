@@ -5,7 +5,17 @@
     "logout": "Déconnexion",
     "profile": "Profil",
     "loading": "Chargement...",
-    "processing": "En cours..."
+    "processing": "En cours...",
+    "saving": "Enregistrement...",
+    "select": "Sélectionner",
+    "update": "Mettre à jour",
+    "create": "Créer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "required": "Champs obligatoires",
+    "optional": "Optionnel"
   },
   "auth": {
     "welcomeBack": "Bon retour!",
@@ -27,6 +37,64 @@
     "buttons": {
       "signIn": "Se connecter",
       "createAccount": "Créer un compte"
+    }
+  },
+  "dashboard": {
+    "teacher": "Tableau de bord de l'enseignant",
+    "inspector": "Tableau de bord de l'inspecteur",
+    "user": {
+      "role": "Rôle"
+    },
+    "navigation": {
+      "profile": "Profil",
+      "schedule": "Emploi du temps",
+      "lessons": "Leçons",
+      "absences": "Absences",
+      "progress": "Progrès"
+    }
+  },
+  "teacherProfile": {
+    "title": "Profil de l'enseignant",
+    "personal": {
+      "title": "Informations personnelles",
+      "fullName": "Nom complet",
+      "dateOfBirth": "Date de naissance",
+      "firstName": "Prénom",
+      "lastName": "Nom"
+    },
+    "professional": {
+      "title": "Informations professionnelles",
+      "jobTitle": "Fonction",
+      "level": "Niveau",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "workInstitution": "Établissement de travail",
+      "position": "Poste",
+      "grade": "Grade",
+      "appointmentDate": "Date de nomination",
+      "confirmationDate": "Date de titularisation",
+      "maritalStatus": {
+        "label": "Situation familiale",
+        "select": "Sélectionner un statut",
+        "single": "Célibataire",
+        "married": "Marié(e)",
+        "divorced": "Divorcé(e)",
+        "widowed": "Veuf(ve)"
+      },
+      "certificateObtained": "Diplôme obtenu"
+    },
+    "messages": {
+      "loadError": "Échec du chargement des données du profil",
+      "updateSuccess": "Profil mis à jour avec succès",
+      "createSuccess": "Profil créé avec succès",
+      "updateError": "Échec de la mise à jour du profil",
+      "createError": "Échec de la création du profil",
+      "fillRequired": "Veuillez remplir tous les champs obligatoires"
+    },
+    "buttons": {
+      "updateProfile": "Mettre à jour le profil",
+      "createProfile": "Créer le profil",
+      "submit": "Soumettre"
     }
   },
   "landing": {
@@ -59,6 +127,57 @@
         "secure": "Gestion sécurisée des données",
         "responsive": "Design adaptatif pour tous les appareils"
       }
+    }
+  },
+  "weeklySchedule": {
+    "title": "Emploi du temps hebdomadaire",
+    "addEntry": "Ajouter une entrée",
+    "editEntry": "Modifier l'entrée",
+    "noEntries": "Pas d'entrées pour ce jour",
+    "fields": {
+      "dayOfWeek": "Jour de la semaine",
+      "startTime": "Heure de début",
+      "endTime": "Heure de fin",
+      "subjectClass": "Matière/Classe"
+    },
+    "messages": {
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette entrée?",
+      "loadError": "Échec du chargement des données",
+      "deleteSuccess": "Entrée supprimée avec succès",
+      "deleteError": "Échec de la suppression de l'entrée",
+      "saveSuccess": "Entrée enregistrée avec succès",
+      "updateSuccess": "Entrée mise à jour avec succès",
+      "saveError": "Échec de l'enregistrement de l'entrée",
+      "fillRequired": "Veuillez remplir tous les champs obligatoires"
+    }
+  },
+  "lessonPlans": {
+    "title": "Plans de cours",
+    "addPlan": "Ajouter un plan",
+    "editPlan": "Modifier le plan",
+    "noPlans": "Aucun plan de cours. Cliquez sur \"Ajouter un plan\" pour créer votre premier.",
+    "fields": {
+      "lessonNumber": "Numéro de leçon",
+      "objectives": "Objectifs",
+      "status": "État",
+      "remarks": "Remarques",
+      "actions": "Actions",
+      "completionStatus": "Marquer comme terminé"
+    },
+    "status": {
+      "completed": "Terminé",
+      "notCompleted": "Non terminé"
+    },
+    "messages": {
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce plan?",
+      "loadError": "Échec du chargement des plans",
+      "deleteSuccess": "Plan supprimé avec succès",
+      "deleteError": "Échec de la suppression du plan",
+      "saveSuccess": "Plan enregistré avec succès",
+      "updateSuccess": "Plan mis à jour avec succès",
+      "saveError": "Échec de l'enregistrement du plan",
+      "fillRequired": "Veuillez remplir tous les champs obligatoires",
+      "statusUpdate": "Leçon {{number}} marquée comme {{status}}"
     }
   },
   "inspector": {

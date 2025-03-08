@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
 import { TeacherProfileType } from '../../lib/types';
 
 export function TeacherProfile() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -38,17 +40,14 @@ export function TeacherProfile() {
           .eq('user_id', user.id)
           .single();
         
-        if (error && error.code !== 'PGRST116') { // PGRST116 means no rows returned
+        if (error && error.code !== 'PGRST116') {
           throw error;
         }
         
         if (data) {
           setProfileExists(true);
-          // Personal Information
           setFullName(data.full_name || '');
           setDateOfBirth(data.date_of_birth || '');
-          
-          // Professional Information
           setJobTitle(data.job_title || '');
           setLevel(data.level || '');
           setFirstName(data.first_name || '');
@@ -65,14 +64,14 @@ export function TeacherProfile() {
         }
       } catch (error) {
         console.error('Error loading profile:', error);
-        setMessage({ text: 'Failed to load profile data', type: 'error' });
+        setMessage({ text: t('teacherProfile.messages.loadError'), type: 'error' });
       } finally {
         setLoading(false);
       }
     }
     
     loadProfile();
-  }, [user]);
+  }, [user, t]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,11 +83,8 @@ export function TeacherProfile() {
     try {
       const profileData: Partial<TeacherProfileType> = {
         user_id: user.id,
-        // Personal Information
         full_name: fullName,
         date_of_birth: dateOfBirth || undefined,
-        
-        // Professional Information
         job_title: jobTitle,
         level: level || undefined,
         first_name: firstName,
@@ -105,14 +101,12 @@ export function TeacherProfile() {
       let error;
       
       if (profileExists) {
-        // Update existing profile
         const { error: updateError } = await supabase
           .from('teacher_profiles')
           .update(profileData)
           .eq('user_id', user.id);
         error = updateError;
       } else {
-        // Create new profile
         const { error: insertError } = await supabase
           .from('teacher_profiles')
           .insert([profileData]);
@@ -125,13 +119,13 @@ export function TeacherProfile() {
       if (error) throw error;
       
       setMessage({ 
-        text: profileExists ? 'Profile updated successfully' : 'Profile created successfully', 
+        text: profileExists ? t('teacherProfile.messages.updateSuccess') : t('teacherProfile.messages.createSuccess'), 
         type: 'success' 
       });
     } catch (error) {
       console.error('Error saving profile:', error);
       setMessage({ 
-        text: profileExists ? 'Failed to update profile' : 'Failed to create profile', 
+        text: profileExists ? t('teacherProfile.messages.updateError') : t('teacherProfile.messages.createError'), 
         type: 'error' 
       });
     } finally {
@@ -145,7 +139,7 @@ export function TeacherProfile() {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-6">Teacher Profile</h2>
+      <h2 className="text-xl font-semibold mb-6">{t('teacherProfile.title')}</h2>
       
       {message && (
         <div className={`p-4 mb-6 rounded-md ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
@@ -156,11 +150,11 @@ export function TeacherProfile() {
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Personal Information Section */}
         <div>
-          <h3 className="text-lg font-medium mb-4 pb-2 border-b">Personal Information</h3>
+          <h3 className="text-lg font-medium mb-4 pb-2 border-b">{t('teacherProfile.personal.title')}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name
+                {t('teacherProfile.personal.fullName')}
               </label>
               <input
                 id="fullName"
@@ -174,7 +168,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-1">
-                Date of Birth
+                {t('teacherProfile.personal.dateOfBirth')}
               </label>
               <input
                 id="dateOfBirth"
@@ -189,11 +183,11 @@ export function TeacherProfile() {
         
         {/* Professional Information Section */}
         <div>
-          <h3 className="text-lg font-medium mb-4 pb-2 border-b">Professional Information</h3>
+          <h3 className="text-lg font-medium mb-4 pb-2 border-b">{t('teacherProfile.professional.title')}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700 mb-1">
-                Job Title (الوظيفة)
+                {t('teacherProfile.professional.jobTitle')}
               </label>
               <input
                 id="jobTitle"
@@ -207,7 +201,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="level" className="block text-sm font-medium text-gray-700 mb-1">
-                Level (المستوى)
+                {t('teacherProfile.professional.level')}
               </label>
               <input
                 id="level"
@@ -220,7 +214,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                First Name (الاسم)
+                {t('teacherProfile.professional.firstName')}
               </label>
               <input
                 id="firstName"
@@ -234,7 +228,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                Last Name (اللقب)
+                {t('teacherProfile.professional.lastName')}
               </label>
               <input
                 id="lastName"
@@ -248,7 +242,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="workInstitution" className="block text-sm font-medium text-gray-700 mb-1">
-                Work Institution (مؤسسة العمل)
+                {t('teacherProfile.professional.workInstitution')}
               </label>
               <input
                 id="workInstitution"
@@ -262,7 +256,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-1">
-                Position (الصفة)
+                {t('teacherProfile.professional.position')}
               </label>
               <input
                 id="position"
@@ -275,7 +269,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="grade" className="block text-sm font-medium text-gray-700 mb-1">
-                Grade (الدرجة)
+                {t('teacherProfile.professional.grade')}
               </label>
               <input
                 id="grade"
@@ -288,7 +282,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="appointmentDate" className="block text-sm font-medium text-gray-700 mb-1">
-                Appointment Date (تاريخ التعيين)
+                {t('teacherProfile.professional.appointmentDate')}
               </label>
               <input
                 id="appointmentDate"
@@ -301,7 +295,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="confirmationDate" className="block text-sm font-medium text-gray-700 mb-1">
-                Confirmation Date (تاريخ الترسيم)
+                {t('teacherProfile.professional.confirmationDate')}
               </label>
               <input
                 id="confirmationDate"
@@ -314,7 +308,7 @@ export function TeacherProfile() {
             
             <div>
               <label htmlFor="maritalStatus" className="block text-sm font-medium text-gray-700 mb-1">
-                Marital Status (الحالة العائلية)
+                {t('teacherProfile.professional.maritalStatus.label')}
               </label>
               <select
                 id="maritalStatus"
@@ -322,17 +316,17 @@ export function TeacherProfile() {
                 onChange={(e) => setMaritalStatus(e.target.value)}
                 className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
               >
-                <option value="">Select status</option>
-                <option value="single">Single</option>
-                <option value="married">Married</option>
-                <option value="divorced">Divorced</option>
-                <option value="widowed">Widowed</option>
+                <option value="">{t('teacherProfile.professional.maritalStatus.select')}</option>
+                <option value="single">{t('teacherProfile.professional.maritalStatus.single')}</option>
+                <option value="married">{t('teacherProfile.professional.maritalStatus.married')}</option>
+                <option value="divorced">{t('teacherProfile.professional.maritalStatus.divorced')}</option>
+                <option value="widowed">{t('teacherProfile.professional.maritalStatus.widowed')}</option>
               </select>
             </div>
             
             <div>
               <label htmlFor="certificateObtained" className="block text-sm font-medium text-gray-700 mb-1">
-                Certificate Obtained (الشهادة المحصل عليها)
+                {t('teacherProfile.professional.certificateObtained')}
               </label>
               <input
                 id="certificateObtained"
@@ -351,7 +345,7 @@ export function TeacherProfile() {
             disabled={saving}
             className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
           >
-            {saving ? 'Saving...' : (profileExists ? 'Update Profile' : 'Create Profile')}
+            {saving ? t('common.saving') : (profileExists ? t('teacherProfile.buttons.updateProfile') : t('teacherProfile.buttons.createProfile'))}
           </button>
         </div>
       </form>
