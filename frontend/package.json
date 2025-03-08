@@ -13,6 +13,7 @@
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@supabase/supabase-js": "^2.39.1",
+    "@tabler/icons-react": "^3.31.0",
     "framer-motion": "^12.4.10",
     "i18next": "^23.7.11",
     "i18next-browser-languagedetector": "^8.0.4",
